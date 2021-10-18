@@ -6,7 +6,6 @@ use App\Models\Assignment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
 use Faker\Factory as Faker;
-use Illuminate\Support\Str;
 
 class AssignmentFactory extends Factory
 {
@@ -36,15 +35,15 @@ class AssignmentFactory extends Factory
             'client' => 'PT. ' . $this->faker->name($gender),
             'nspp' => $this->faker->numerify(),
             'nspk' => $random_nspk,
-            'description' => $this->faker->sentences(3),
+            'description' => $faker->sentence(mt_rand(3, 6)),
             'deadline' => $this->faker->dateTime(),
-            'info' => $faker->sentence(1) . '<BR>' . $faker->sentence(1) . '<BR>' . $faker->sentence(1) . '<BR>',
-            // 'priority' => $random_priority[array_rand($random_priority)],
+            'info' => $faker->sentence(mt_rand(3, 5)) . '<BR>' . $faker->sentence(mt_rand(3, 5)) . '<BR>' . $faker->sentence(mt_rand(3, 5)) . '<BR>',
+            'info' => 'haha',
             'priority' => $random_priority[array_rand($random_priority)],
             'created' => $today,
             'approval' => NULL,
             'approval_date' =>  NULL,
-            'status' => FALSE,
+            'status' => FALSE
         ];
     }
 }
