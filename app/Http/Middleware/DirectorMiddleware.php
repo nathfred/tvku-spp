@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Auth;
 
 class DirectorMiddleware
 {
@@ -19,6 +20,6 @@ class DirectorMiddleware
         if (Auth::user()->role == 'director') {
             return $next($request);
         }
-        return redirect(route('employee-index'))->with('message', 'forbidden-employee-access');
+        return redirect(route('director-index'))->with('message', 'forbidden-director-access');
     }
 }

@@ -16,6 +16,7 @@ class CreateAssignmentsTable extends Migration
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id')->nullable();
+            $table->string('type');
             $table->string('client');
             $table->integer('nspp');
             $table->string('nspk');
@@ -26,7 +27,7 @@ class CreateAssignmentsTable extends Migration
             $table->date('created');
             $table->boolean('approval')->nullable();
             $table->date('approval_date')->nullable();
-            $table->boolean('status')->nullable(); // APAKAH SUDAH READY UNTUK DIBACA PAK GURUH
+            $table->boolean('submit')->nullable(); // APAKAH SUDAH READY UNTUK DIBACA PAK GURUH
             $table->timestamps();
         });
     }

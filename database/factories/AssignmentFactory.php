@@ -32,18 +32,18 @@ class AssignmentFactory extends Factory
 
         return [
             'user_id' => mt_rand(2, 3),
+            'type' => 'Berbayar',
             'client' => 'PT. ' . $this->faker->name($gender),
             'nspp' => $this->faker->numerify(),
             'nspk' => $random_nspk,
             'description' => $faker->sentence(mt_rand(3, 6)),
             'deadline' => $this->faker->dateTime(),
             'info' => $faker->sentence(mt_rand(3, 5)) . '<BR>' . $faker->sentence(mt_rand(3, 5)) . '<BR>' . $faker->sentence(mt_rand(3, 5)) . '<BR>',
-            'info' => 'haha',
             'priority' => $random_priority[array_rand($random_priority)],
             'created' => $today,
             'approval' => NULL,
             'approval_date' =>  NULL,
-            'status' => FALSE
+            'submit' => FALSE
         ];
     }
 }

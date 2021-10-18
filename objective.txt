@@ -4,6 +4,7 @@
 -SweetAlert (DONE)
 -Bootstrap (DONE)
 -Mazer (DONE)
+-Factory & Seeder (DONE)
 
 Director
 -Read, Export, Authorize SPP
