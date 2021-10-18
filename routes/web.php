@@ -27,6 +27,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+// DIRECTOR ACTIVITY USES DIRECTORCONTROLLER
 Route::group(['middleware' => ['auth', 'director'], 'prefix' => 'director'], function () {
     Route::get('/index', [DirectorController::class, 'index'])->name('director-index'); // INDEX
 
@@ -35,12 +36,13 @@ Route::group(['middleware' => ['auth', 'director'], 'prefix' => 'director'], fun
     Route::get('/assignment/show', [DirectorController::class, 'show_assignment'])->name('director-show-assignment'); // SINGLE (FORM)
 
     // PRIORITY
-    Route::get('/assignment/priority/{id}/{priority}', [AssignmentController::class, 'priority_assignment'])->name('director-priority-assignment'); // SET ASSIGNMENT PRIORITY (BIASA/PENTING/SANGAT)
+    Route::get('/assignment/priority/{id}/{priority}', [DirectorController::class, 'priority_assignment'])->name('director-priority-assignment'); // SET ASSIGNMENT PRIORITY (BIASA/PENTING/SANGAT)
 
     // APPROVE
-    Route::get('/assignment/approve/{id}/{approve}', [AssignmentController::class, 'approve_assignment'])->name('director-approve-assignment'); // SET ASSIGNMENT APPROVAL (BOOLEAN)
+    Route::get('/assignment/approve/{id}/{approve}', [DirectorController::class, 'approve_assignment'])->name('director-approve-assignment'); // SET ASSIGNMENT APPROVAL (BOOLEAN)
 });
 
+// EMPLOYEE ACTIVITY USES EMPLOYEECONTROLLER & ASSIGNMENTCONTROLLER
 Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], function () {
     Route::get('/index', [EmployeeController::class, 'index'])->name('employee-index'); // INDEX
 
@@ -63,12 +65,14 @@ Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], fun
     Route::get('/assignment/submit/{submit}/{id}', [EmployeeController::class, 'submit_assignment'])->name('employee-submit-assignment'); // SUBMIT ASSIGNMENT (BOOLEAN)
 });
 
+// PDF EXPORT (laravel-pdf by codedge)
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/pdf/free/{id}', [PDFController::class, 'createPDF_free'])->name('create-pdf-free');
     Route::get('/pdf/paid/{id}', [PDFController::class, 'createPDF_paid'])->name('create-pdf-paid');
     Route::get('/pdf/swap/{id}', [PDFController::class, 'createPDF_swap'])->name('create-pdf-swap');
 });
 
+// DUMMY ROUTING
 Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], function () {
     // Route::get('/index', [EmployeeController::class, 'index'])->name('employee-index'); // INDEX
 
