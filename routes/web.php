@@ -21,4 +21,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+Route::group(['middleware' => ['auth', 'director'], 'prefix' => 'director'], function () {
+    Route::get('/index', [DirectorController::class, 'index'])->name('director-index');
+});
+
+Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], function () {
+    Route::get('/index', [EmployeeController::class, 'index'])->name('employee-index');
+});
+
+require __DIR__ . '/auth.php';

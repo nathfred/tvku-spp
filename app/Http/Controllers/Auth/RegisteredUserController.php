@@ -20,7 +20,10 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        return view('auth.register', [
+            'title' => 'Register',
+            'active' => 'register'
+        ]);
     }
 
     /**
@@ -35,19 +38,43 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'gender' => ['required'],
+            'code' => ['required'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        if ($request->code == env('DIRECTOR_CODE', 'directortvkuch49')) {
+            $user = User::create([
+                'name' => $request->name,
+                'role' => 'director',
+                'gender' => $request->gender,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+        } elseif ($request->code == env('EMPLOYEE_CODE', 'employee')) {
+            $user = User::create([
+                'name' => $request->name,
+                'role' => 'employee',
+                'gender' => $request->gender,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+        } else {
+            return back()->with('message', 'code-error');
+        }
 
         event(new Registered($user));
 
         Auth::login($user);
+
+        if ($request->code == env('DIRECTOR_CODE', 'directortvkuch49')) {
+            return redirect(RouteServiceProvider::HOME_DIRECTOR);
+        } elseif ($request->code == env('EMPLOYEE_CODE', 'employee')) {
+            return redirect(RouteServiceProvider::HOME_EMPLOYEE);
+        } else {
+            return back()->with('message', 'code-error');
+        }
 
         return redirect(RouteServiceProvider::HOME);
     }
