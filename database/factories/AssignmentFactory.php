@@ -31,7 +31,7 @@ class AssignmentFactory extends Factory
         $random_priority = ['Biasa', 'Penting', 'Sangat Penting'];
 
         return [
-            'user_id' => mt_rand(1, 2),
+            'user_id' => mt_rand(2, 3),
             'client' => 'PT. ' . $this->faker->name($gender),
             'nspp' => $this->faker->numerify(),
             'nspk' => $random_nspk,

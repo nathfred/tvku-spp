@@ -1,0 +1,20 @@
+-Breeze Login & Register (DONE)
+-Middleware (DONE)
+-Database (DONE)
+-SweetAlert (DONE)
+-Bootstrap (DONE)
+-Mazer (DONE)
+
+Director
+-Read, Export, Authorize SPP
+-Alerts
+
+Employee
+-Read, Create, Update, Delete, Export, Submit SPP
+-Alerts
+
+PDF
+-Export
+-Responsive table size
+-Responsive multi-pages
+-Import Director Signature
