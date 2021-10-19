@@ -176,7 +176,19 @@ class AssignmentController extends Controller
             ]);
         }
 
-
         return redirect(route('employee-show-assignments'))->with('message', 'success-create-assignment');
+    }
+
+    public function delete_assignment($id)
+    {
+        $assignment = Assignment::find($id);
+
+        // VALIDASI APAKAH ASSIGNMENT ADA
+        if ($assignment === NULL) {
+            return back()->with('message', 'assignment-not-found');
+        }
+
+        $assignment->delete();
+        return back()->with('message', 'success-delete-assignment');
     }
 }

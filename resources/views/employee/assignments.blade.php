@@ -94,7 +94,8 @@
                                             @elseif ($assignment->type == 'Barter')
                                                 <a href="{{ route('create-pdf-barter', ['id' => $assignment->id]) }}" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
                                             @endif
-                                            <a href="{{ route('employee-delete-assignment', ['id' => $assignment->id]) }}" class="btn btn-danger"><i class="bi bi-x-square"></i></a>
+                                            {{-- <a href="{{ route('employee-delete-assignment', ['id' => $assignment->id]) }}" class="btn btn-danger"><i class="bi bi-x-square"></i></a> --}}
+                                            <button class="btn btn-danger" onclick="delete_confirm('{{ $assignment->id }}')"><i class="bi bi-x-square"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -114,6 +115,32 @@
         // Simple Datatable
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+    <script>
+        function delete_confirm(assignment_id) {
+            var assignment_id = assignment_id;
+            var url = '{{ route("employee-delete-assignment", ":slug") }}';
+            url = url.replace(':slug', assignment_id);
+            Swal.fire({
+                title: 'Apakah anda yakin?',
+                text: "Aksi ini tidak dapat diulangi!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus data!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Data Terhapus!',
+                        text: 'Berhasil Menghapus Data Penugasan',
+                        showConfirmButton: true,
+                    })
+                }
+            })
+        }
     </script>
 
 @include('employee.alerts')

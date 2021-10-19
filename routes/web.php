@@ -56,11 +56,11 @@ Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], fun
     Route::post('/assignment/create/{type}', [AssignmentController::class, 'store_assignment'])->name('employee-store-assignment'); // STORE CREATED ASSIGNMENT
 
     // FORM EDIT & STORE
-    Route::get('/assignment/edit/{type}/{id}', [EmployeeController::class, 'edit_assignment'])->name('employee-edit-assignment'); // EDIT ASSIGNMENT (SHOW SINGLE ASSIGNMENT : FORM)
-    Route::post('/assignment/save/{type}/{id}', [EmployeeController::class, 'save_assignment'])->name('employee-save-assignment'); // SAVE EDITED ASSIGNMENT
+    Route::get('/assignment/edit/{type}/{id}', [AssignmentController::class, 'edit_assignment'])->name('employee-edit-assignment'); // EDIT ASSIGNMENT (SHOW SINGLE ASSIGNMENT : FORM)
+    Route::post('/assignment/save/{type}/{id}', [AssignmentController::class, 'save_assignment'])->name('employee-save-assignment'); // SAVE EDITED ASSIGNMENT
 
     // DELETE
-    Route::get('/assignment/delete/{id}', [EmployeeController::class, 'delete_assignment'])->name('employee-delete-assignment'); // DELETE ASSIGNMENT
+    Route::get('/assignment/delete/{id}', [AssignmentController::class, 'delete_assignment'])->name('employee-delete-assignment'); // DELETE ASSIGNMENT
 
     // SUBMIT
     Route::get('/assignment/submit/{submit}/{id}', [EmployeeController::class, 'submit_assignment'])->name('employee-submit-assignment'); // SUBMIT ASSIGNMENT (BOOLEAN)
