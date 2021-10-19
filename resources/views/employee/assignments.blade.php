@@ -27,6 +27,7 @@
                             <tr>
                                 <th class="text-center">No</th>
                                 <th>Tanggal Dibuat</th>
+                                <th>Jenis</th>
                                 <th>No. SPP</th>
                                 <th>No. SPK</th>
                                 <th>Klien</th>
@@ -49,8 +50,13 @@
                                     <tr>
                                         <td class="text-center">{{ $i }}</td>
                                         <td>{{ $assignment->created }}</td>
+                                        <td>{{ $assignment->type }}</td>
                                         <td>{{ $assignment->nspp }}</td>
-                                        <td>{{ $assignment->nspk }}</td>
+                                        @if ($assignment->nspk === NULL || $assignment->nspk == '')
+                                            <td>-</td>
+                                        @else
+                                            <td>{{ $assignment->nspk }}</td>
+                                        @endif
                                         <td>{{ $assignment->client }}</td>
                                         <td>{{ $assignment->deadline }}</td>
                                         <!-- Priority -->
@@ -61,9 +67,9 @@
                                         @endif
                                         <!-- Submit -->
                                         @if ($assignment->submit === NULL || $assignment->submit == 0 || $assignment->submit == '0')
-                                            <td><p class="btn-warning text-center text-white mt-0 mb-0">Belum</p></td>
+                                            <td><p class="btn-warning text-center rounded text-white mt-0 mb-0">Belum</p></td>
                                         @else
-                                            <td><p class="btn-primary text-center mt-0 mb-0">Sudah</p></td>
+                                            <td><p class="btn-primary text-center rounded mt-0 mb-0">Sudah</p></td>
                                         @endif
                                         <!-- Approval -->
                                         @if ($assignment->approval === NULL || $assignment->approval == '')
@@ -84,7 +90,7 @@
                                             @if ($assignment->type == 'Free')
                                                 <a href="{{ route('create-pdf-free', ['id' => $assignment->id]) }}" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
                                             @elseif ($assignment->type == 'Berbayar')
-                                                <a href="{{ route('create-pdf-paid', ['id' => $assignment->id]) }}" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
+                                                <a href="{{ route('create-pdf-berbayar', ['id' => $assignment->id]) }}" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
                                             @elseif ($assignment->type == 'Barter')
                                                 <a href="{{ route('create-pdf-barter', ['id' => $assignment->id]) }}" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
                                             @endif

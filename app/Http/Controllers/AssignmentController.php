@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Assignment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AssignmentController extends Controller
 {
@@ -87,10 +90,93 @@ class AssignmentController extends Controller
     {
         $assignments = Assignment::orderBy('created_at', 'desc')->get();
 
+        // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y)
+        foreach ($assignments as $assignment) {
+            // UBAH KE FORMAT CARBON
+            $assignment->created = Carbon::createFromFormat('Y-m-d', $assignment->created);
+            // UBAH FORMAT KE d-m-Y
+            $assignment->created = $assignment->created->format('d-m-Y');
+        }
+
         return view('employee.assignments', [
             'title' => 'List Penugasan',
             'active' => 'assignment',
             'assignments' => $assignments,
         ]);
+    }
+
+    public function pre_create_assignment()
+    {
+        return view('employee.pre_create', [
+            'title' => 'Buat Penugasan',
+            'active' => 'assignment',
+        ]);
+    }
+
+    public function create_assignment($type)
+    {
+        if ($type == 'Free') {
+        } elseif ($type == 'Berbayar') {
+        } elseif ($type == 'Barter') {
+        } else {
+            return back()->with('message', 'unknown-type');
+        }
+
+        $user_id = Auth::id();
+        $user = User::where('id', $user_id)->first();
+
+        return view('employee.create', [
+            'title' => 'Buat Penugasan (' . $type . ')',
+            'active' => 'assignment',
+            'type' => $type,
+            'user' => $user,
+        ]);
+    }
+
+    public function store_assignment(Request $request, $type)
+    {
+        $user_id = Auth::id();
+
+        // VALIDASI INPUT
+        if ($type == 'Free') { // FREE TIDAK ADA NSPK
+        } else { // BERBAYAR DAN BARTER ADA NSPK
+            $request->validate([
+                'nspk' => 'required|string',
+            ]);
+        }
+        $request->validate([
+            'created' => 'required|date',
+            'client' => 'required|string',
+            'nspp' => 'required|integer',
+            'description' => 'required|string',
+            'deadline' => 'required|string',
+            'info' => 'required|string'
+        ]);
+
+        if ($type == 'Free') {
+            Assignment::create([
+                'created' => $request->created,
+                'client' => $request->client,
+                'nspp' => $request->nspp,
+                'description' => $request->description,
+                'deadline' => $request->deadline,
+                'info' => $request->info,
+                'type' => $type,
+            ]);
+        } else {
+            Assignment::create([
+                'created' => $request->created,
+                'client' => $request->client,
+                'nspp' => $request->nspp,
+                'nspk' => $request->nspk,
+                'description' => $request->description,
+                'deadline' => $request->deadline,
+                'info' => $request->info,
+                'type' => $type,
+            ]);
+        }
+
+
+        return redirect(route('employee-show-assignments'))->with('message', 'success-create-assignment');
     }
 }

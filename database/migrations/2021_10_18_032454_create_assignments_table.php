@@ -19,7 +19,7 @@ class CreateAssignmentsTable extends Migration
             $table->string('type');
             $table->string('client');
             $table->integer('nspp');
-            $table->string('nspk');
+            $table->string('nspk')->nullable();
             $table->string('description');
             $table->string('deadline');
             $table->text('info');

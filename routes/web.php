@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 Route::get('/home', [UserController::class, 'home'])->name('home');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/back', [UserController::class, 'back'])->name('back-button');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -50,7 +51,7 @@ Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], fun
     Route::get('/assignment/show', [AssignmentController::class, 'show_assignments'])->name('employee-show-assignments'); // ALL (TABLE)
 
     // FORM CREATE & STORE
-    Route::get('/assignment/pre-create', [AssignmentController::class, 'pre-create_assignment'])->name('employee-pre-create-assignment'); // SELECT ASSIGNMENT TYPE
+    Route::get('/assignment/pre-create', [AssignmentController::class, 'pre_create_assignment'])->name('employee-pre-create-assignment'); // SELECT ASSIGNMENT TYPE
     Route::get('/assignment/create/{type}', [AssignmentController::class, 'create_assignment'])->name('employee-create-assignment'); // CREATE ASSIGNMENT (FORM)
     Route::post('/assignment/create/{type}', [AssignmentController::class, 'store_assignment'])->name('employee-store-assignment'); // STORE CREATED ASSIGNMENT
 
@@ -68,8 +69,8 @@ Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], fun
 // PDF EXPORT (laravel-pdf by codedge)
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/pdf/free/{id}', [PDFController::class, 'createPDF_free'])->name('create-pdf-free');
-    Route::get('/pdf/paid/{id}', [PDFController::class, 'createPDF_paid'])->name('create-pdf-paid');
-    Route::get('/pdf/swap/{id}', [PDFController::class, 'createPDF_swap'])->name('create-pdf-swap');
+    Route::get('/pdf/berbayar/{id}', [PDFController::class, 'createPDF_berbayar'])->name('create-pdf-berbayar');
+    Route::get('/pdf/barter/{id}', [PDFController::class, 'createPDF_barter'])->name('create-pdf-barter');
 });
 
 // DUMMY ROUTING
