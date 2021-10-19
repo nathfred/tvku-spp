@@ -11,7 +11,7 @@ Director
 -Alerts
 
 Employee
--Read, Create, Update, Delete, Export, Submit SPP
+-Read, Create, Update, Delete, Export, Submit SPP (Read, Create, Delete)
 -Alerts
 
 PDF
