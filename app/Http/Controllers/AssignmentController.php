@@ -82,4 +82,15 @@ class AssignmentController extends Controller
     {
         //
     }
+
+    public function show_assignments()
+    {
+        $assignments = Assignment::orderBy('created_at', 'desc')->get();
+
+        return view('employee.assignments', [
+            'title' => 'List Penugasan',
+            'active' => 'assignment',
+            'assignments' => $assignments,
+        ]);
+    }
 }

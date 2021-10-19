@@ -17,7 +17,7 @@ use App\Http\Controllers\AssignmentController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('login'));
 });
 
 Route::get('/home', [UserController::class, 'home'])->name('home');
