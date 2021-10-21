@@ -3,8 +3,8 @@
 <head>
     <title>Surat Perintah Penugasan</title>
 
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app-mazer.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app-mazer.css') }}"> --}}
     <link rel="shortcut icon" href="{{ asset('img/tvku_favicon.png') }}" type="image/x-icon">
 </head>
 <body>
@@ -53,7 +53,7 @@
             </tr>
             <tr>
                 <td style="width:35%; border-collapse: collapse; border: 1px solid black;">Info Waktu Produksi/Penayangan</td>
-                <td style="border-collapse: collapse; border:1px solid black;"><textarea>{{ $assignment->info }}</textarea></td>
+                {{-- <td style="border-collapse: collapse; border:1px solid black;"><textarea>{{ $assignment->info }}</textarea></td> --}}
             </tr>
         </table>
         <br>
