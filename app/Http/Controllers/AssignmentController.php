@@ -88,7 +88,7 @@ class AssignmentController extends Controller
 
     public function show_assignments()
     {
-        $assignments = Assignment::orderBy('created_at', 'desc')->get();
+        $assignments = Assignment::orderBy('created', 'desc')->get();
 
         // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y)
         foreach ($assignments as $assignment) {
@@ -190,5 +190,61 @@ class AssignmentController extends Controller
 
         $assignment->delete();
         return back()->with('message', 'success-delete-assignment');
+    }
+
+    public function edit_assignment($type, $id)
+    {
+        $assignment = Assignment::where('id', $id)->first();
+
+        // VALIDASI APAKAH ASSIGNMENT ADA
+        if ($assignment === NULL) {
+            return back()->with('message', 'assignment-not-found');
+        }
+
+        return view('employee.edit', [
+            'title' => 'Edit Penugasan',
+            'active' => 'assignment',
+            'assignment' => $assignment,
+            'type' => $type
+        ]);
+    }
+
+    public function save_assignment(Request $request, $type, $id)
+    {
+        $assignment = Assignment::find($id);
+
+        // VALIDASI APAKAH ASSIGNMENT ADA
+        if ($assignment === NULL) {
+            return back()->with('message', 'assignment-not-found');
+        }
+
+        if ($type == 'Free') {
+            // TANPA VALIDASI NSPK
+        } else {
+            $request->validate([
+                'nspk' => 'required|string',
+            ]);
+        }
+        $request->validate([
+            'created' => 'required|date',
+            'client' => 'required|string',
+            'nspp' => 'required|integer',
+            'description' => 'required|string',
+            'deadline' => 'required|string',
+            'info' => 'required|string'
+        ]);
+
+        if ($type != 'Free') { // BERBAYAR ATAU BARTER ADA NSPK
+            $assignment->nspk = $request->nspk;
+        }
+        $assignment->created = $request->created;
+        $assignment->client = $request->client;
+        $assignment->nspp = $request->nspp;
+        $assignment->description = $request->description;
+        $assignment->deadline = $request->deadline;
+        $assignment->info = $request->info;
+        $assignment->save();
+
+        return back()->with('message', 'success-edit-assignment');
     }
 }
