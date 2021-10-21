@@ -17,7 +17,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $assignments = Assignment::orderBy('created', 'desc')->get();
+        $assignments = Assignment::whereNull('approval')->orderBy('created', 'desc')->get();
 
         // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y)
         foreach ($assignments as $assignment) {
@@ -31,6 +31,7 @@ class EmployeeController extends Controller
         $user = User::where('id', $user_id)->first();
 
         $today = Carbon::today('GMT+7');
+        $total_assignments = Assignment::orderBy('created', 'desc')->get();
         $responed_assignments = Assignment::whereNotNull('approval')->get();
         $unresponed_assignments = Assignment::whereNull('approval')->get();
         $today_assignments = Assignment::where('created', $today)->get();
@@ -49,7 +50,7 @@ class EmployeeController extends Controller
             'active' => 'index',
             'user' => $user,
             'assignments' => $assignments,
-            'total_assignment' => $assignments->count(),
+            'total_assignment' => $total_assignments->count(),
             'responded_assignment' => $responed_assignments->count(),
             'unresponded_assignment' => $unresponed_assignments->count(),
             'today_assignment' => $today_assignments->count(),

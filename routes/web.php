@@ -70,9 +70,9 @@ Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], fun
 
 // PDF EXPORT (laravel-pdf by codedge)
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/pdf/free/{id}', [PDFController::class, 'createPDF_free'])->name('create-pdf-free');
-    Route::get('/pdf/berbayar/{id}', [PDFController::class, 'createPDF_berbayar'])->name('create-pdf-berbayar');
-    Route::get('/pdf/barter/{id}', [PDFController::class, 'createPDF_barter'])->name('create-pdf-barter');
+    Route::get('/pdf/free/{id}', [PDFController::class, 'createPDF'])->name('create-pdf-free');
+    Route::get('/pdf/berbayar/{id}', [PDFController::class, 'createPDF'])->name('create-pdf-berbayar');
+    Route::get('/pdf/barter/{id}', [PDFController::class, 'createPDF'])->name('create-pdf-barter');
 });
 
 // DUMMY ROUTING

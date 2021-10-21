@@ -17,7 +17,7 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        $assignments = Assignment::where('submit', 1)->orderBy('created', 'desc')->get();
+        $assignments = Assignment::whereNull('approval')->where('submit', 1)->orderBy('created', 'desc')->get();
 
         // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y)
         foreach ($assignments as $assignment) {
@@ -31,6 +31,7 @@ class DirectorController extends Controller
         $user = User::where('id', $user_id)->first();
 
         $today = Carbon::today('GMT+7');
+        $total_assignments = Assignment::orderBy('created', 'desc')->where('submit', 1)->get();
         $responed_assignments = Assignment::whereNotNull('approval')->where('submit', 1)->get();
         $unresponed_assignments = Assignment::whereNull('approval')->where('submit', 1)->get();
         $today_assignments = Assignment::where('created', $today)->where('submit', 1)->get();
@@ -49,7 +50,7 @@ class DirectorController extends Controller
             'active' => 'index',
             'user' => $user,
             'assignments' => $assignments,
-            'total_assignment' => $assignments->count(),
+            'total_assignment' => $total_assignments->count(),
             'responded_assignment' => $responed_assignments->count(),
             'unresponded_assignment' => $unresponed_assignments->count(),
             'today_assignment' => $today_assignments->count(),

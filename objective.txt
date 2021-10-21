@@ -7,11 +7,11 @@
 -Factory & Seeder (DONE)
 
 Director
--Read, Export, Authorize SPP
+-Read, Export, Authorize SPP (DONE)
 -Alerts
 
 Employee
--Read, Create, Update, Delete, Export, Submit SPP (Read, Create, Delete)
+-Read, Create, Update, Delete, Export, Submit SPP (DONE)
 -Alerts
 
 PDF
