@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DOMPDFController;
 use App\Http\Controllers\DirectorController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\AssignmentController;
@@ -71,9 +72,12 @@ Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], fun
 
 // PDF EXPORT (laravel-pdf by codedge)
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/pdf/free/{id}', [PDFController::class, 'createPDF'])->name('create-pdf-free');
-    Route::get('/pdf/berbayar/{id}', [PDFController::class, 'createPDF'])->name('create-pdf-berbayar');
-    Route::get('/pdf/barter/{id}', [PDFController::class, 'createPDF'])->name('create-pdf-barter');
+    // Route::get('/pdf/free/{id}', [PDFController::class, 'createPDF'])->name('create-pdf-free');
+    // Route::get('/pdf/berbayar/{id}', [PDFController::class, 'createPDF'])->name('create-pdf-berbayar');
+    // Route::get('/pdf/barter/{id}', [PDFController::class, 'createPDF'])->name('create-pdf-barter');
+    Route::get('/pdf/free/{id}', [DOMPDFController::class, 'createPDF'])->name('create-pdf-free');
+    Route::get('/pdf/berbayar/{id}', [DOMPDFController::class, 'createPDF'])->name('create-pdf-berbayar');
+    Route::get('/pdf/barter/{id}', [DOMPDFController::class, 'createPDF'])->name('create-pdf-barter');
 });
 
 // DUMMY ROUTING
