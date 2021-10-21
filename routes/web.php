@@ -34,7 +34,8 @@ Route::group(['middleware' => ['auth', 'director'], 'prefix' => 'director'], fun
 
     // READ
     Route::get('/assignment/show', [DirectorController::class, 'show_assignments'])->name('director-show-assignments'); // ALL (TABLE)
-    Route::get('/assignment/show', [DirectorController::class, 'show_assignment'])->name('director-show-assignment'); // SINGLE (FORM)
+    Route::get('/assignment/detail/{type}/{id}', [DirectorController::class, 'detail_assignment'])->name('director-detail-assignment'); // SINGLE (FORM)
+    Route::post('/assignment/detail/{type}/{id}', [DirectorController::class, 'save_assignment'])->name('director-save-assignment'); // POST REQUEST SET PRIORITY AND APPROVAL
 
     // PRIORITY
     Route::get('/assignment/priority/{id}/{priority}', [DirectorController::class, 'priority_assignment'])->name('director-priority-assignment'); // SET ASSIGNMENT PRIORITY (BIASA/PENTING/SANGAT)

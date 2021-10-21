@@ -1,4 +1,4 @@
-@extends('layouts.employee.app')
+@extends('layouts.director.app')
 
 @section('content')
     <header class="mb-3">
@@ -33,7 +33,6 @@
                                 <th>Klien</th>
                                 <th>Deadline</th>
                                 <th>Prioritas</th>
-                                <th>Submit</th>
                                 <th>Acc Direktur</th>
                                 <th>Aksi</th>
                             </tr>
@@ -65,12 +64,6 @@
                                         @else
                                             <td>{{ $assignment->priority }}</td>
                                         @endif
-                                        <!-- Submit -->
-                                        @if ($assignment->submit === NULL || $assignment->submit == 0 || $assignment->submit == '0')
-                                            <td><p class="btn-warning text-center rounded text-white mt-0 mb-0">Belum</p></td>
-                                        @else
-                                            <td><p class="btn-primary text-center rounded mt-0 mb-0">Sudah</p></td>
-                                        @endif
                                         <!-- Approval -->
                                         @if ($assignment->approval === NULL || $assignment->approval == '')
                                             <td>-</td>
@@ -81,12 +74,7 @@
                                         @endif
                                         <!-- Aksi -->
                                         <td>
-                                            <a href="{{ route('employee-edit-assignment', ['type' => $assignment->type, 'id' => $assignment->id]) }}" class="btn btn-info"><i class="bi bi-arrow-left-square"></i></a>
-                                            @if ($assignment->submit == 0)
-                                                <a href="{{ route('employee-submit-assignment', ['submit' => 1, 'id' => $assignment->id]) }}" class="btn btn-primary"><i class="bi bi-check-square"></i></a>
-                                            @elseif ($assignment->submit == 1)
-                                                <a href="{{ route('employee-submit-assignment', ['submit' => 0, 'id' => $assignment->id]) }}" class="btn btn-warning"><i class="bi bi-dash-square"></i></a>
-                                            @endif
+                                            <a href="{{ route('director-detail-assignment', ['type' => $assignment->type, 'id' => $assignment->id]) }}" class="btn btn-info"><i class="bi bi-arrow-left-square"></i></a>
                                             @if ($assignment->type == 'Free')
                                                 <a href="{{ route('create-pdf-free', ['id' => $assignment->id]) }}" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
                                             @elseif ($assignment->type == 'Berbayar')
@@ -94,8 +82,6 @@
                                             @elseif ($assignment->type == 'Barter')
                                                 <a href="{{ route('create-pdf-barter', ['id' => $assignment->id]) }}" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
                                             @endif
-                                            {{-- <a href="{{ route('employee-delete-assignment', ['id' => $assignment->id]) }}" class="btn btn-danger"><i class="bi bi-x-square"></i></a> --}}
-                                            <button class="btn btn-danger" onclick="delete_confirm('{{ $assignment->id }}')"><i class="bi bi-x-square"></i></button>
                                         </td>
                                     </tr>
                                 @endforeach

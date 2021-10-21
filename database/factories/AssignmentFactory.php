@@ -40,7 +40,7 @@ class AssignmentFactory extends Factory
             'description' => $faker->sentence(mt_rand(3, 6)),
             'deadline' => $this->faker->date('d_m-Y'),
             'info' => $faker->sentence(mt_rand(3, 5)) . '<BR>' . $faker->sentence(mt_rand(3, 5)) . '<BR>' . $faker->sentence(mt_rand(3, 5)) . '<BR>',
-            'priority' => $random_priority[array_rand($random_priority)],
+            'priority' => NULL,
             'created' => $today,
             'approval' => NULL,
             'approval_date' =>  NULL,
