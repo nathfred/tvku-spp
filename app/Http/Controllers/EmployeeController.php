@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assignment;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -80,5 +81,25 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function submit_assignment($submit, $id)
+    {
+        $assignment = Assignment::find($id);
+
+        // VALIDASI APAKAH ASSIGNMENT ADA
+        if ($assignment === NULL) {
+            return back()->with('message', 'assignment-not-found');
+        }
+
+        if ($submit == 1) {
+            $status = TRUE;
+        } else {
+            $status = FALSE;
+        }
+        $assignment->submit = $status;
+        $assignment->save();
+
+        return back()->with('message', 'success-submit-assignment');
     }
 }
