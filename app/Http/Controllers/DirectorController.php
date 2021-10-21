@@ -17,7 +17,7 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        $assignments = Assignment::whereNull('approval')->orderBy('created', 'desc')->get();
+        $assignments = Assignment::whereNull('approval')->where('submit', 1)->orderBy('created', 'desc')->get();
 
         // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y)
         foreach ($assignments as $assignment) {
@@ -31,10 +31,10 @@ class DirectorController extends Controller
         $user = User::where('id', $user_id)->first();
 
         $today = Carbon::today('GMT+7');
-        $responed_assignments = Assignment::whereNotNull('approval')->get();
-        $unresponed_assignments = Assignment::whereNull('approval')->get();
-        $today_assignments = Assignment::where('created', $today)->get();
-        $recent_assignments = Assignment::orderBy('created', 'desc')->take(3)->get();
+        $responed_assignments = Assignment::whereNotNull('approval')->where('submit', 1)->get();
+        $unresponed_assignments = Assignment::whereNull('approval')->where('submit', 1)->get();
+        $today_assignments = Assignment::where('created', $today)->where('submit', 1)->get();
+        $recent_assignments = Assignment::where('submit', 1)->orderBy('created', 'desc')->take(3)->get();
 
         // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y)
         foreach ($recent_assignments as $assignment) {
@@ -125,7 +125,7 @@ class DirectorController extends Controller
 
     public function show_assignments()
     {
-        $assignments = Assignment::orderBy('created', 'desc')->get();
+        $assignments = Assignment::orderBy('created', 'desc')->where('submit', 1)->get();
 
         // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y)
         foreach ($assignments as $assignment) {
@@ -140,5 +140,52 @@ class DirectorController extends Controller
             'active' => 'assignment',
             'assignments' => $assignments,
         ]);
+    }
+
+    public function detail_assignment($type, $id)
+    {
+        $assignment = Assignment::where('id', $id)->first();
+
+        // VALIDASI APAKAH ASSIGNMENT ADA
+        if ($assignment === NULL) {
+            return back()->with('message', 'assignment-not-found');
+        }
+
+        return view('director.detail', [
+            'title' => 'Detail Penugasan',
+            'active' => 'assignment',
+            'type' => $type,
+            'assignment' => $assignment,
+        ]);
+    }
+
+    public function save_assignment(Request $request, $type, $id)
+    {
+        $assignment = Assignment::find($id);
+
+        // VALIDASI APAKAH ASSIGNMENT ADA
+        if ($assignment === NULL) {
+            return back()->with('message', 'assignment-not-found');
+        }
+
+        $request->approve = FALSE;
+        if ($request->approval == '1') {
+            $request->approve = TRUE;
+        } else {
+            $request->approve = FALSE;
+        }
+
+        $request->validate([
+            'priority' => 'required|string',
+            'approval' => 'required|integer',
+        ]);
+
+        $today = Carbon::today('GMT+7');
+        $assignment->priority = $request->priority;
+        $assignment->approval = $request->approve;
+        $assignment->approval_date = $today;
+        $assignment->save();
+
+        return redirect(route('director-show-assignments'))->with('message', 'success-approve-assignment');
     }
 }

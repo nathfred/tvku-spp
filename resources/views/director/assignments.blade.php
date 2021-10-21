@@ -33,7 +33,7 @@
                                 <th>Klien</th>
                                 <th>Deadline</th>
                                 <th>Prioritas</th>
-                                <th>Acc Direktur</th>
+                                <th>Approval</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
