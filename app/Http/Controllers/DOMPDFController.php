@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
+use Carbon\Carbon;
 use App\Models\Assignment;
 use Illuminate\Http\Request;
-use PDF;
 
 class DOMPDFController extends Controller
 {
-    public function cetak_pdf($id)
+    public function createPDF($id)
     {
         $assignment = Assignment::where('id', $id)->first();
         // VALIDASI APAKAH ASSIGNMENT ADA
@@ -16,7 +17,28 @@ class DOMPDFController extends Controller
             return back()->with('message', 'assignment-not-found');
         }
 
-        $pdf = PDF::loadview('pegawai_pdf', ['assignment' => $assignment]);
+        $date = Carbon::createFromFormat('Y-m-d', $assignment->created);
+        $month = $date->month;
+        $assignment->month_roman = $this->numberToRoman($month);
+        $assignment->year = $date->year;
+
+        $pdf = PDF::loadview('spp_pdf', ['assignment' => $assignment]);
         return $pdf->download('laporan-pegawai-pdf');
+    }
+
+    function numberToRoman($number)
+    {
+        $map = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1);
+        $returnValue = '';
+        while ($number > 0) {
+            foreach ($map as $roman => $int) {
+                if ($number >= $int) {
+                    $number -= $int;
+                    $returnValue .= $roman;
+                    break;
+                }
+            }
+        }
+        return $returnValue;
     }
 }
