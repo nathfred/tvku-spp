@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Assignment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -14,7 +17,44 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $assignments = Assignment::orderBy('created', 'desc')->get();
+
+        // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y)
+        foreach ($assignments as $assignment) {
+            // UBAH KE FORMAT CARBON
+            $assignment->created = Carbon::createFromFormat('Y-m-d', $assignment->created);
+            // UBAH FORMAT KE d-m-Y
+            $assignment->created = $assignment->created->format('d-m-Y');
+        }
+
+        $user_id = Auth::id();
+        $user = User::where('id', $user_id)->first();
+
+        $today = Carbon::today('GMT+7');
+        $responed_assignments = Assignment::whereNotNull('approval')->get();
+        $unresponed_assignments = Assignment::whereNull('approval')->get();
+        $today_assignments = Assignment::where('created', $today)->get();
+        $recent_assignments = Assignment::orderBy('created', 'desc')->take(3)->get();
+
+        // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y)
+        foreach ($recent_assignments as $assignment) {
+            // UBAH KE FORMAT CARBON
+            $assignment->created = Carbon::createFromFormat('Y-m-d', $assignment->created);
+            // UBAH FORMAT KE d-m-Y
+            $assignment->created = $assignment->created->format('d-m-Y');
+        }
+
+        return view('employee.index', [
+            'title' => 'List Penugasan',
+            'active' => 'index',
+            'user' => $user,
+            'assignments' => $assignments,
+            'total_assignment' => $assignments->count(),
+            'responded_assignment' => $responed_assignments->count(),
+            'unresponded_assignment' => $unresponed_assignments->count(),
+            'today_assignment' => $today_assignments->count(),
+            'recent_assignments' => $recent_assignments,
+        ]);
     }
 
     /**

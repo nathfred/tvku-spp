@@ -1,4 +1,4 @@
-@extends('layouts.director.app')
+@extends('layouts.employee.app')
 
 @section('content')
     <header class="mb-3">
@@ -142,7 +142,7 @@
                                                     @endif
                                                     <!-- Aksi -->
                                                     <td>
-                                                        <a href="{{ route('director-detail-assignment', ['type' => $assignment->type, 'id' => $assignment->id]) }}" class="btn btn-info"><i class="bi bi-arrow-left-square"></i></a>
+                                                        <a href="{{ route('employee-edit-assignment', ['type' => $assignment->type, 'id' => $assignment->id]) }}" class="btn btn-info"><i class="bi bi-arrow-left-square"></i></a>
                                                         @if ($assignment->type == 'Free')
                                                             <a href="{{ route('create-pdf-free', ['id' => $assignment->id]) }}" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
                                                         @elseif ($assignment->type == 'Berbayar')

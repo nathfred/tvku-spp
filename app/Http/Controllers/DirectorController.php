@@ -17,7 +17,7 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        $assignments = Assignment::whereNull('approval')->where('submit', 1)->orderBy('created', 'desc')->get();
+        $assignments = Assignment::where('submit', 1)->orderBy('created', 'desc')->get();
 
         // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y)
         foreach ($assignments as $assignment) {

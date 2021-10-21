@@ -40,12 +40,12 @@
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        {{-- <li class="sidebar-item {{ ($active === "profile") ? 'active' : '' }}">
-                            <a href="{{ route('employee-profile') }}" class='sidebar-link'>
+                        <li class="sidebar-item {{ ($active === "index") ? 'active' : '' }}">
+                            <a href="{{ route('employee-index') }}" class='sidebar-link'>
                                 <i class="bi bi-person-badge-fill"></i>
-                                <span>Profil</span>
+                                <span>Dashboard</span>
                             </a>
-                        </li> --}}
+                        </li>
 
                         <li class="sidebar-item has-sub {{ ($active === "assignment") ? 'active' : '' }}">
                             <a href="#" class='sidebar-link'>
