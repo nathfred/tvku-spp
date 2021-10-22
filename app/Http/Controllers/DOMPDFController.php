@@ -17,13 +17,19 @@ class DOMPDFController extends Controller
             return back()->with('message', 'assignment-not-found');
         }
 
+        // BUAT ROMAWI UNTUK BULAN
         $date = Carbon::createFromFormat('Y-m-d', $assignment->created);
         $month = $date->month;
         $assignment->month_roman = $this->numberToRoman($month);
+        // BUAT TAHUN
         $assignment->year = $date->year;
 
+        // SPLIT ATTRIBUT 'info' (text data type in MySQL) to array
+        $array_info = preg_split('/\r\n|[\r\n]/', $assignment->info);
+        $assignment->array_info = $array_info;
+
         $pdf = PDF::loadview('spp_pdf', ['assignment' => $assignment]);
-        return $pdf->download('laporan-pegawai-pdf');
+        return $pdf->download('SPP_' . $assignment->nspp . '_' . $assignment->type);
     }
 
     function numberToRoman($number)

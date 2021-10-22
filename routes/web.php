@@ -20,8 +20,8 @@ use App\Http\Controllers\AssignmentController;
 */
 
 Route::get('/', function () {
-    return redirect(route('login'));
-});
+    return redirect()->route('login');
+})->name('root-login');
 
 Route::get('/home', [UserController::class, 'home'])->name('home');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
@@ -79,7 +79,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pdf/berbayar/{id}', [DOMPDFController::class, 'createPDF'])->name('create-pdf-berbayar');
     Route::get('/pdf/barter/{id}', [DOMPDFController::class, 'createPDF'])->name('create-pdf-barter');
 
-    Route::get('/pdf/test/{id}', [UserController::class, 'test_DOMPDF'])->name('test-DOMPDF');
+    Route::get('/pdf/view/{id}', [UserController::class, 'test_DOMPDF'])->name('test-DOMPDF');
 });
 
 // DUMMY ROUTING
