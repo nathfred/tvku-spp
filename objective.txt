@@ -15,7 +15,7 @@ Employee
 -Alerts
 
 PDF
--Export
--Responsive table size
+-Export & Routing (DONE)
+-Responsive table size (DONE)
 -Responsive multi-pages
 -Import Director Signature

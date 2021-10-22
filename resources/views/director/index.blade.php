@@ -168,7 +168,8 @@
                     <div class="card-body py-4 px-5">
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xl">
-                                <img src="{{ asset('images/faces/male') }}.png">
+                                {{-- <img src="{{ asset('images/faces/male') }}.png"> --}}
+                                <i class="fas fa-grin-alt" style="width:50px; height:50px;"></i>
                             </div>
                             <div class="ms-3 name">
                                 <h5 class="font-bold">{{ $user->name }}</h5>
