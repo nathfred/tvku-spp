@@ -38,14 +38,27 @@
         </table>
         <center>
             <h3 style="margin-bottom: 0px; padding-bottom:0px;"><b><u>SURAT PERINTAH PENUGASAN</u></b></h3>
-            <p style="margin-top: 0px; padding-top:0px;">No. {{ $assignment->nspp }}/SPP-D/{{ $assignment->month_roman }}/TVKU/{{ $assignment->year }}</p>
+            @if ($assignment->type == 'Berbayar')
+                <p style="margin-top: 0px; padding-top:0px;">No. {{ $assignment->nspp }}/SPP-D/{{ $assignment->month_roman }}/TVKU/{{ $assignment->year }}</p>
+            @elseif ($assignment->type == 'Barter')
+                <p style="margin-top: 0px; padding-top:0px;">No. {{ $assignment->nspp }}/BARTER/SPP-D/{{ $assignment->month_roman }}/TVKU/{{ $assignment->year }}</p>
+            @elseif ($assignment->type == 'Free')
+                <p style="margin-top: 0px; padding-top:0px;">No. {{ $assignment->nspp }}/FREE/SPP-D/{{ $assignment->month_roman }}/TVKU/{{ $assignment->year }}</p>
+            @else
+                <p style="margin-top: 0px; padding-top:0px;">No. {{ $assignment->nspp }}/SPP-D/{{ $assignment->month_roman }}/TVKU/{{ $assignment->year }}</p>
+            @endif
         </center>
         
-        <br>Berdasarkan :<br>
-        SPK Nomor {{ $assignment->nspk }} ({{ $assignment->client }} - {{ $assignment->description }})<br>
-        
-        <br>Invoice Nomor I-{{ $assignment->nspp }}/KEU/TVKU/{{ $assignment->month_roman }}/{{ $assignment->year }}<br>
-        <br>
+        @if ($assignment->type == 'Berbayar' || $assignment->type == 'Barter')
+            <br>Berdasarkan :<br>
+            SPK Nomor {{ $assignment->nspk }} ({{ $assignment->client }} - {{ $assignment->description }})<br>
+            @if ($assignment->type == 'Berbayar')
+                <br>Invoice Nomor I-{{ $assignment->nspp }}/KEU/TVKU/{{ $assignment->month_roman }}/{{ $assignment->year }}<br>
+            @elseif ($assignment->type == 'Barter')
+                <br><br>
+            @endif
+            <br>
+        @endif
         Dengan ini menugaskan Direktur Operasional untuk melakukan produksi maupun penayangan dengan ketentuan sebagai berikut:<br>
         <br>
         <table id="table1" style="width:100%; border: 1px solid black;">
