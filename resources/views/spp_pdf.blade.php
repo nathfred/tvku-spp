@@ -88,7 +88,7 @@
         <br>
         Agar dilaksanakan sebaik-baiknya dengan penuh tanggung jawab <br>
         <br>
-        Semarang, {{ $assignment->created }}
+        Semarang, {{ $assignment->day }} {{ $assignment->month_string }} {{ $assignment->year }}
         <br><br>
         Direktur Utama<br>
         PT. Televisi Kampus Udinus<br>

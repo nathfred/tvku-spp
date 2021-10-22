@@ -19,10 +19,17 @@ class DOMPDFController extends Controller
 
         // BUAT ROMAWI UNTUK BULAN
         $date = Carbon::createFromFormat('Y-m-d', $assignment->created);
+        $day = $date->day;
+        $assignment->day = $day;
         $month = $date->month;
+        $assignment->month = $month;
         $assignment->month_roman = $this->numberToRoman($month);
+        $month_string = $date->locale('id')->monthName;
+        $assignment->month_string = $month_string;
         // BUAT TAHUN
         $assignment->year = $date->year;
+        // UBAH FORMAT KE d-m-Y
+        $assignment->created = $date->format('d-m-Y');
 
         // SPLIT ATTRIBUT 'info' (text data type in MySQL) to array
         $array_info = preg_split('/\r\n|[\r\n]/', $assignment->info);
