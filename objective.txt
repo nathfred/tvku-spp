@@ -21,6 +21,7 @@ PDF
 -Import Director Signature
 
 REVISI
--Free : Hapus Client & Keterangna
--Smiley di Index
--Export PDF New Tab
+-Free : Hapus Client & Keterangan
+-Berbayar : Tambah atribut nominal
+-Smiley di Index (DONE)
+-Export PDF New Tab (DONE)

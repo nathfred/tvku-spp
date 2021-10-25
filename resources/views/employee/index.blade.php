@@ -144,11 +144,14 @@
                                                     <td>
                                                         <a href="{{ route('employee-edit-assignment', ['type' => $assignment->type, 'id' => $assignment->id]) }}" class="btn btn-info"><i class="bi bi-arrow-left-square"></i></a>
                                                         @if ($assignment->type == 'Free')
-                                                            <a href="{{ route('create-pdf-free', ['id' => $assignment->id]) }}" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
+                                                            {{-- <a href="{{ route('create-pdf-free', ['id' => $assignment->id]) }}" target="_blank" class="btn btn-success"><i class="bi bi-printer-fill"></i></a> --}}
+                                                            <a href="{{ route('show-pdf', ['id' => $assignment->id]) }}" target="_blank" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
                                                         @elseif ($assignment->type == 'Berbayar')
-                                                            <a href="{{ route('create-pdf-berbayar', ['id' => $assignment->id]) }}" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
+                                                            {{-- <a href="{{ route('create-pdf-berbayar', ['id' => $assignment->id]) }}" target="_blank" class="btn btn-success"><i class="bi bi-printer-fill"></i></a> --}}
+                                                            <a href="{{ route('show-pdf', ['id' => $assignment->id]) }}" target="_blank" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
                                                         @elseif ($assignment->type == 'Barter')
-                                                            <a href="{{ route('create-pdf-barter', ['id' => $assignment->id]) }}" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
+                                                            {{-- <a href="{{ route('create-pdf-barter', ['id' => $assignment->id]) }}" target="_blank" class="btn btn-success"><i class="bi bi-printer-fill"></i></a> --}}
+                                                            <a href="{{ route('show-pdf', ['id' => $assignment->id]) }}" target="_blank" class="btn btn-success"><i class="bi bi-printer-fill"></i></a>
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -173,7 +176,7 @@
                                 @else
                                     <img src="{{ asset('images/faces/male') }}.png">
                                 @endif
-                                <i class="fas fa-grin-alt" style="width:50px; height:50px;"></i>
+                                {{-- <i class="fas fa-grin-alt" style="width:50px; height:50px;"></i> --}}
                             </div>
                             <div class="ms-3 name">
                                 <h5 class="font-bold">{{ $user->name }}</h5>

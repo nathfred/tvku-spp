@@ -80,6 +80,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pdf/barter/{id}', [DOMPDFController::class, 'createPDF'])->name('create-pdf-barter');
 
     Route::get('/pdf/view/{id}', [UserController::class, 'test_DOMPDF'])->name('test-DOMPDF');
+    Route::get('/pdf/show/{id}', [DOMPDFController::class, 'show_pdf'])->name('show-pdf');
 });
 
 // DUMMY ROUTING
