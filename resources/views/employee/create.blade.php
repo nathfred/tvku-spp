@@ -42,14 +42,14 @@
                                             <div class="col-md-8 form-group">
                                                 <input type="date" id="created" class="form-control" name="created" required>
                                             </div>
-                                            @if ($type != 'Free')
+                                            {{-- @if ($type != 'Free') --}}
                                                 <div class="col-md-4">
                                                     <label>Client</label>
                                                 </div>
                                                 <div class="col-md-8 form-group">
                                                     <input type="text" id="client" class="form-control" name="client" required>
                                                 </div>
-                                            @endif
+                                            {{-- @endif --}}
                                             <div class="col-md-4">
                                                 <label>No. SPP</label>
                                             </div>
@@ -64,14 +64,14 @@
                                                     <input type="text" id="nspk" class="form-control" name="nspk" required>
                                                 </div>
                                             @endif
-                                            @if ($type != 'Free')
+                                            {{-- @if ($type != 'Free') --}}
                                                 <div class="col-md-4">
                                                     <label>Keterangan</label>
                                                 </div>
                                                 <div class="col-md-8 form-group">
                                                     <input type="text" id="description" class="form-control" name="description" required>
                                                 </div>
-                                            @endif
+                                            {{-- @endif --}}
                                             @if ($type == 'Berbayar')
                                                 <div class="col-md-4">
                                                     <label>Nominal</label>

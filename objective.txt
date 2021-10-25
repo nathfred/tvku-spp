@@ -25,3 +25,6 @@ REVISI
 -Berbayar : Tambah atribut nominal (DONE)
 -Smiley di Index (DONE)
 -Export PDF New Tab (DONE)
+-Free : Kembalikan Client & Keterangan (DONE)
+-Edit PDF Format for Free Type (DONE)
+-Nominal auto titik

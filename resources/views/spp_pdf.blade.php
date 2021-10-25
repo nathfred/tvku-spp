@@ -58,6 +58,9 @@
                 <br><br>
             @endif
             <br>
+        @elseif ($assignment->type == 'Free')
+        <br>Berdasarkan :<br>
+            Surat dari {{ $assignment->client }} - {{ $assignment->description }}<br>
         @endif
         Dengan ini menugaskan Direktur Operasional untuk melakukan produksi maupun penayangan dengan ketentuan sebagai berikut:<br>
         <br>

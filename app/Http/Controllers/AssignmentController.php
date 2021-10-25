@@ -164,7 +164,9 @@ class AssignmentController extends Controller
             Assignment::create([
                 'user_id' => $user_id,
                 'created' => $request->created,
+                'client' => $request->client,
                 'nspp' => $request->nspp,
+                'description' => $request->description,
                 'deadline' => $request->deadline,
                 'info' => $request->info,
                 'type' => $type,
@@ -272,6 +274,8 @@ class AssignmentController extends Controller
         }
 
         // SAVE ALL TYPE
+        $assignment->client = $request->client;
+        $assignment->description = $request->description;
         $assignment->created = $request->created;
         $assignment->nspp = $request->nspp;
         $assignment->deadline = $request->deadline;
