@@ -99,7 +99,7 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <tr><td align='center' colspan='11'>Tidak ada Penugasan</td></tr>
+                                <tr><td align='center' colspan='12'>Tidak ada Penugasan</td></tr>
                             @endif
                         </tbody>
                     </table>

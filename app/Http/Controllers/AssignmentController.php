@@ -143,17 +143,19 @@ class AssignmentController extends Controller
             $request->validate([
                 'nspk' => 'required|string',
                 'nominal' => 'required',
+                'client' => 'required|string',
+                'description' => 'required|string',
             ]);
         } else { // BERBAYAR DAN BARTER ADA NSPK
             $request->validate([
                 'nspk' => 'required|string',
+                'client' => 'required|string',
+                'description' => 'required|string',
             ]);
         }
         $request->validate([
             'created' => 'required|date',
-            'client' => 'required|string',
             'nspp' => 'required',
-            'description' => 'required|string',
             'deadline' => 'required|string',
             'info' => 'required|string'
         ]);
@@ -162,9 +164,7 @@ class AssignmentController extends Controller
             Assignment::create([
                 'user_id' => $user_id,
                 'created' => $request->created,
-                'client' => $request->client,
                 'nspp' => $request->nspp,
-                'description' => $request->description,
                 'deadline' => $request->deadline,
                 'info' => $request->info,
                 'type' => $type,

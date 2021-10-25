@@ -17,10 +17,10 @@ class CreateAssignmentsTable extends Migration
             $table->id();
             $table->integer('user_id')->nullable();
             $table->string('type');
-            $table->string('client');
+            $table->string('client')->nullable();
             $table->integer('nspp');
             $table->string('nspk')->nullable();
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('nominal')->nullable();
             $table->string('deadline');
             $table->text('info');

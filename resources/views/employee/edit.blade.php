@@ -62,16 +62,18 @@
                                             <div class="col-md-8 form-group">
                                                 <input type="text" id="nspp" class="form-control" name="nspp" value="{{ $assignment->nspp }}" required>
                                             </div>
-                                            <div class="col-md-4">
-                                                <label>No. SPK</label>
-                                            </div>
-                                            <div class="col-md-8 form-group">
-                                                @if ($type == 'Free' || !$assignment->nspk === NULL )
-                                                    <input type="text" id="nspk" class="form-control" name="nspk" disabled>
-                                                @else
-                                                    <input type="text" id="nspk" class="form-control" name="nspk" value="{{ $assignment->nspk }}" required>
-                                                @endif
-                                            </div>
+                                            @if ($type != 'Free')
+                                                <div class="col-md-4">
+                                                    <label>No. SPK</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    @if ($type == 'Free' || !$assignment->nspk === NULL )
+                                                        <input type="text" id="nspk" class="form-control" name="nspk" disabled>
+                                                    @else
+                                                        <input type="text" id="nspk" class="form-control" name="nspk" value="{{ $assignment->nspk }}" required>
+                                                    @endif
+                                                </div>
+                                            @endif
                                             @if ($type != 'Free')
                                                 <div class="col-md-4">
                                                     <label>Keterangan</label>
@@ -85,7 +87,7 @@
                                                     <label>Nominal</label>
                                                 </div>
                                                 <div class="col-md-8 form-group">
-                                                    <input type="text" id="nominal" class="form-control" name="nominal" required>
+                                                    <input type="text" id="nominal" class="form-control" name="nominal" value="{{ $assignment->nominal }}" required>
                                                 </div>
                                             @endif
                                             <div class="col-md-4">
