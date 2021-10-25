@@ -31,6 +31,7 @@
                                 <th>No. SPP</th>
                                 <th>No. SPK</th>
                                 <th>Klien</th>
+                                <th>Nominal</th>
                                 <th>Deadline</th>
                                 <th>Prioritas</th>
                                 <th>Approval</th>
@@ -56,7 +57,16 @@
                                         @else
                                             <td>{{ $assignment->nspk }}</td>
                                         @endif
-                                        <td>{{ $assignment->client }}</td>
+                                        @if ($assignment->client === NULL || $assignment->client == '')
+                                            <td>-</td>
+                                        @else
+                                            <td>{{ $assignment->client }}</td>
+                                        @endif
+                                        @if ($assignment->type == 'Berbayar')
+                                            <td>{{ $assignment->nominal }}</td>
+                                        @else
+                                            <td>-</td>
+                                        @endif
                                         <td>{{ $assignment->deadline }}</td>
                                         <!-- Priority -->
                                         @if ($assignment->priority === NULL || $assignment->priority == '')
@@ -89,7 +99,7 @@
                                     </tr>
                                 @endforeach
                             @else
-                                <tr><td align='center' colspan='10'>Tidak ada Penugasan</td></tr>
+                                <tr><td align='center' colspan='11'>Tidak ada Penugasan</td></tr>
                             @endif
                         </tbody>
                     </table>

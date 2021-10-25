@@ -21,6 +21,7 @@ class CreateAssignmentsTable extends Migration
             $table->integer('nspp');
             $table->string('nspk')->nullable();
             $table->string('description');
+            $table->string('nominal')->nullable();
             $table->string('deadline');
             $table->text('info');
             $table->string('priority')->nullable();

@@ -21,7 +21,7 @@ PDF
 -Import Director Signature
 
 REVISI
--Free : Hapus Client & Keterangan
--Berbayar : Tambah atribut nominal
+-Free : Hapus Client & Keterangan (DONE)
+-Berbayar : Tambah atribut nominal (DONE)
 -Smiley di Index (DONE)
 -Export PDF New Tab (DONE)

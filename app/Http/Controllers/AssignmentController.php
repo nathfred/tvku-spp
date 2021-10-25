@@ -139,6 +139,11 @@ class AssignmentController extends Controller
 
         // VALIDASI INPUT
         if ($type == 'Free') { // FREE TIDAK ADA NSPK
+        } elseif ($type == 'Berbayar') {
+            $request->validate([
+                'nspk' => 'required|string',
+                'nominal' => 'required',
+            ]);
         } else { // BERBAYAR DAN BARTER ADA NSPK
             $request->validate([
                 'nspk' => 'required|string',
@@ -164,7 +169,20 @@ class AssignmentController extends Controller
                 'info' => $request->info,
                 'type' => $type,
             ]);
-        } else {
+        } elseif ($type == 'Berbayar') {
+            Assignment::create([
+                'user_id' => $user_id,
+                'created' => $request->created,
+                'client' => $request->client,
+                'nspp' => $request->nspp,
+                'nspk' => $request->nspk,
+                'description' => $request->description,
+                'deadline' => $request->deadline,
+                'info' => $request->info,
+                'type' => $type,
+                'nominal' => $request->nominal,
+            ]);
+        } else { // BARTER
             Assignment::create([
                 'user_id' => $user_id,
                 'created' => $request->created,
@@ -220,29 +238,42 @@ class AssignmentController extends Controller
             return back()->with('message', 'assignment-not-found');
         }
 
-        if ($type == 'Free') {
-            // TANPA VALIDASI NSPK
-        } else {
+        // VALIDASI INPUT
+        if ($type == 'Free') { // FREE TIDAK ADA NSPK
+        } elseif ($type == 'Berbayar') {
             $request->validate([
                 'nspk' => 'required|string',
+                'nominal' => 'required',
+                'client' => 'required|string',
+                'description' => 'required|string',
+            ]);
+        } else { // BERBAYAR DAN BARTER ADA NSPK
+            $request->validate([
+                'nspk' => 'required|string',
+                'client' => 'required|string',
+                'description' => 'required|string',
             ]);
         }
         $request->validate([
             'created' => 'required|date',
-            'client' => 'required|string',
             'nspp' => 'required',
-            'description' => 'required|string',
             'deadline' => 'required|string',
             'info' => 'required|string'
         ]);
 
         if ($type != 'Free') { // BERBAYAR ATAU BARTER ADA NSPK
             $assignment->nspk = $request->nspk;
+            $assignment->client = $request->client;
+            $assignment->description = $request->description;
         }
+
+        if ($type == 'Berbayar') {
+            $assignment->nominal = $request->nominal;
+        }
+
+        // SAVE ALL TYPE
         $assignment->created = $request->created;
-        $assignment->client = $request->client;
         $assignment->nspp = $request->nspp;
-        $assignment->description = $request->description;
         $assignment->deadline = $request->deadline;
         $assignment->info = $request->info;
         $assignment->save();

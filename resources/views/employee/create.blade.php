@@ -42,34 +42,44 @@
                                             <div class="col-md-8 form-group">
                                                 <input type="date" id="created" class="form-control" name="created" required>
                                             </div>
-                                            <div class="col-md-4">
-                                                <label>Client</label>
-                                            </div>
-                                            <div class="col-md-8 form-group">
-                                                <input type="text" id="client" class="form-control" name="client" required>
-                                            </div>
+                                            @if ($type != 'Free')
+                                                <div class="col-md-4">
+                                                    <label>Client</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input type="text" id="client" class="form-control" name="client" required>
+                                                </div>
+                                            @endif
                                             <div class="col-md-4">
                                                 <label>No. SPP</label>
                                             </div>
                                             <div class="col-md-8 form-group">
                                                 <input type="text" id="nspp" class="form-control" name="nspp" required>
                                             </div>
-                                            <div class="col-md-4">
-                                                <label>No. SPK</label>
-                                            </div>
-                                            <div class="col-md-8 form-group">
-                                                @if ($type == 'Free')
-                                                    <input type="text" id="nspk" class="form-control" name="nspk" disabled>
-                                                @else
+                                            @if ($type != 'Free')
+                                                <div class="col-md-4">
+                                                    <label>No. SPK</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
                                                     <input type="text" id="nspk" class="form-control" name="nspk" required>
-                                                @endif
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label>Keterangan</label>
-                                            </div>
-                                            <div class="col-md-8 form-group">
-                                                <input type="text" id="description" class="form-control" name="description" required>
-                                            </div>
+                                                </div>
+                                            @endif
+                                            @if ($type != 'Free')
+                                                <div class="col-md-4">
+                                                    <label>Keterangan</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input type="text" id="description" class="form-control" name="description" required>
+                                                </div>
+                                            @endif
+                                            @if ($type == 'Berbayar')
+                                                <div class="col-md-4">
+                                                    <label>Nominal</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input type="text" id="nominal" class="form-control" name="nominal" required>
+                                                </div>
+                                            @endif
                                             <div class="col-md-4">
                                                 <label>Deadline</label>
                                             </div>
