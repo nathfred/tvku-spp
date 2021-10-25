@@ -19,3 +19,8 @@ PDF
 -Responsive table size (DONE)
 -Responsive multi-pages
 -Import Director Signature
+
+REVISI
+-Free : Hapus Client & Keterangna
+-Smiley di Index
+-Export PDF New Tab

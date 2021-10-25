@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Str;
 
 class RegisteredUserController extends Controller
 {
@@ -51,6 +52,7 @@ class RegisteredUserController extends Controller
                 'gender' => $request->gender,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'remember_token' => Str::random(10),
             ]);
         } elseif ($request->code == env('EMPLOYEE_CODE', 'tvkuch49')) {
             $user = User::create([
@@ -59,6 +61,7 @@ class RegisteredUserController extends Controller
                 'gender' => $request->gender,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
+                'remember_token' => Str::random(10),
             ]);
         } else {
             return back()->with('message', 'code-error');

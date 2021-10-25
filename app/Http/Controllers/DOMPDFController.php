@@ -36,7 +36,7 @@ class DOMPDFController extends Controller
         $assignment->array_info = $array_info;
 
         $pdf = PDF::loadview('spp_pdf', ['assignment' => $assignment]);
-        return $pdf->download('SPP_' . $assignment->nspp . '_' . $assignment->type);
+        return $pdf->download('SPP_' . $assignment->nspp . '_' . $assignment->type . '.pdf');
     }
 
     function numberToRoman($number)

@@ -155,6 +155,7 @@ class AssignmentController extends Controller
 
         if ($type == 'Free') {
             Assignment::create([
+                'user_id' => $user_id,
                 'created' => $request->created,
                 'client' => $request->client,
                 'nspp' => $request->nspp,
@@ -165,6 +166,7 @@ class AssignmentController extends Controller
             ]);
         } else {
             Assignment::create([
+                'user_id' => $user_id,
                 'created' => $request->created,
                 'client' => $request->client,
                 'nspp' => $request->nspp,
