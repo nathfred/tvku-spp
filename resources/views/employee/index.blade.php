@@ -168,7 +168,11 @@
                     <div class="card-body py-4 px-5">
                         <div class="d-flex align-items-center">
                             <div class="avatar avatar-xl">
-                                {{-- <img src="{{ asset('images/faces/male') }}.png"> --}}
+                                @if ($user->gender == 'female')
+                                    <img src="{{ asset('images/faces/female') }}.png">
+                                @else
+                                    <img src="{{ asset('images/faces/male') }}.png">
+                                @endif
                                 <i class="fas fa-grin-alt" style="width:50px; height:50px;"></i>
                             </div>
                             <div class="ms-3 name">
@@ -220,4 +224,7 @@
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
     </script>
+
+@include('employee.alerts')
+
 @endsection

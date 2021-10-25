@@ -1,71 +1,52 @@
 <script src="{{ asset('js/sweetalert2.js') }}"></script>
 
-{{-- Employee Profile --}}
-@if (Session::has('message') && Session::get('message') == 'success-register')
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Data Tersimpan',
-            text: 'Profil Pegawai Berhasil Tersimpan',
-            showConfirmButton: true,
-        })
-    </script>
-@elseif (Session::has('message') && Session::get('message') == 'failed-register')
+{{-- Employee Controller --}}
+@if (Session::has('message') && Session::get('message') == 'assignment-not-found')
     <script>
         Swal.fire({
             icon: 'error',
-            title: 'Input Salah',
-            text: 'Input Data Tidak Sesuai Kriteria',
+            title: 'Penugasan Salah!',
+            text: 'Data Penugasan Tidak Ditemukan',
             showConfirmButton: true,
         })
     </script>
-@elseif (Session::has('message') && Session::get('message') == 'register-employee-first')
+@elseif (Session::has('message') && Session::get('message') == 'success-submit-assignment')
     <script>
         Swal.fire({
-            icon: 'warning',
-            title: 'Silahkan Register Pegawai',
-            text: 'Register Pegawai Diperlukan Terlebih Dahulu',
+            icon: 'success',
+            title: 'Berhasil Disubmit!',
+            text: 'Data Penugasan Berhasil Disubmit',
             showConfirmButton: true,
         })
     </script>
 
-{{-- Employee Create Submission --}}
-@elseif (Session::has('message') && Session::get('message') == 'incorrect-date')
+{{-- Assignment Controller --}}
+@elseif (Session::has('message') && Session::get('message') == 'success-delete-assignment')
     <script>
         Swal.fire({
-            icon: 'error',
-            title: 'Kesalahan Input Tanggal',
-            text: 'Tanggal Ijin/Kembali Tidak Valid',
+            icon: 'success',
+            title: 'Menghapus Penugasan!',
+            text: 'Berhasil Menghapus Data Penugasan',
             showConfirmButton: true,
         })
     </script>
-@elseif (Session::has('message') && Session::get('message') == 'max-submission-per-month')
+@elseif (Session::has('message') && Session::get('message') == 'success-create-assignment')
     <script>
         Swal.fire({
-            icon: 'warning',
-            title: 'Batas Cuti Bulanan Dilampaui',
-            text: 'Maximal Cuti 2x Dalam 1 Bulan (Kecuali Hamil)',
+            icon: 'success',
+            title: 'Membuat Penugasan!',
+            text: 'Berhasil Membuat Penugasan Baru',
+            showConfirmButton: true,
+        })
+    </script>
+@elseif (Session::has('message') && Session::get('message') == 'success-edit-assignment')
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Merubah Penugasan!',
+            text: 'Berhasil Merubah Data Penugasan',
             showConfirmButton: true,
         })
     </script>
 
-{{-- Employee Submission --}}
-@elseif (Session::has('message') && Session::get('message') == 'success-submission')
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Pengajuan Berhasil Dibuat',
-            text: 'Silahkan Menunggu Konfirmasi Divisi & HRD',
-            showConfirmButton: true,
-        })
-    </script>
-@elseif (Session::has('message') && Session::get('message') == 'incorrect-sub-id')
-    <script>
-        Swal.fire({
-            icon: 'warning',
-            title: 'Pengajuan Cuti Tidak Valid',
-            text: 'ID Pengajuan Cuti Tidak Ditemukan',
-            showConfirmButton: true,
-        })
-    </script>
 @endif

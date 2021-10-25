@@ -8,11 +8,11 @@
 
 Director
 -Read, Export, Authorize SPP (DONE)
--Alerts
+-Alerts (DONE)
 
 Employee
 -Read, Create, Update, Delete, Export, Submit SPP (DONE)
--Alerts
+-Alerts (DONE)
 
 PDF
 -Export & Routing (DONE)

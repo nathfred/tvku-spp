@@ -187,6 +187,12 @@ class DirectorController extends Controller
         $assignment->approval_date = $today;
         $assignment->save();
 
-        return redirect(route('director-show-assignments'))->with('message', 'success-approve-assignment');
+        if ($request->approve == TRUE) {
+            return redirect(route('director-show-assignments'))->with('message', 'success-approve-assignment');
+        } elseif ($request->approve == FALSE) {
+            return redirect(route('director-show-assignments'))->with('message', 'success-decline-assignment');
+        } else {
+            return redirect(route('director-show-assignments'))->with('message', 'unknown-approve-assignment');
+        }
     }
 }

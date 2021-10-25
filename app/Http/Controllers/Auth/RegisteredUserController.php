@@ -52,7 +52,7 @@ class RegisteredUserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
-        } elseif ($request->code == env('EMPLOYEE_CODE', 'employee')) {
+        } elseif ($request->code == env('EMPLOYEE_CODE', 'tvkuch49')) {
             $user = User::create([
                 'name' => $request->name,
                 'role' => 'employee',
