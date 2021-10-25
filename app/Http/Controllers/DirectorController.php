@@ -134,6 +134,9 @@ class DirectorController extends Controller
             $assignment->created = Carbon::createFromFormat('Y-m-d', $assignment->created);
             // UBAH FORMAT KE d-m-Y
             $assignment->created = $assignment->created->format('d-m-Y');
+            if ($assignment->nominal) {
+                $assignment->nominal = 'Rp. ' .  number_format($assignment->nominal, 0, ",", ".");
+            }
         }
 
         return view('director.assignments', [

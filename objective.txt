@@ -27,4 +27,4 @@ REVISI
 -Export PDF New Tab (DONE)
 -Free : Kembalikan Client & Keterangan (DONE)
 -Edit PDF Format for Free Type (DONE)
--Nominal auto titik
+-Nominal auto titik (DONE)

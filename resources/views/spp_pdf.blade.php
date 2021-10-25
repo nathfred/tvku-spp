@@ -55,7 +55,7 @@
             @if ($assignment->type == 'Berbayar')
                 <br>Invoice Nomor I-{{ $assignment->nspp }}/KEU/TVKU/{{ $assignment->month_roman }}/{{ $assignment->year }}<br>
             @elseif ($assignment->type == 'Barter')
-                <br><br>
+                <br>
             @endif
             <br>
         @elseif ($assignment->type == 'Free')

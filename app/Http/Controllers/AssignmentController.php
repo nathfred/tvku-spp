@@ -90,12 +90,15 @@ class AssignmentController extends Controller
     {
         $assignments = Assignment::orderBy('created', 'desc')->get();
 
-        // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y)
+        // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y) dan Number Format untuk Nominal
         foreach ($assignments as $assignment) {
             // UBAH KE FORMAT CARBON
             $assignment->created = Carbon::createFromFormat('Y-m-d', $assignment->created);
             // UBAH FORMAT KE d-m-Y
             $assignment->created = $assignment->created->format('d-m-Y');
+            if ($assignment->nominal) {
+                $assignment->nominal = 'Rp. ' .  number_format($assignment->nominal, 0, ",", ".");
+            }
         }
 
         return view('employee.assignments', [
