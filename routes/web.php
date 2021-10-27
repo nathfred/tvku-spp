@@ -71,7 +71,7 @@ Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], fun
     Route::get('/assignment/submit/{submit}/{id}', [EmployeeController::class, 'submit_assignment'])->name('employee-submit-assignment'); // SUBMIT ASSIGNMENT (BOOLEAN)
 });
 
-// PDF EXPORT (laravel-pdf by codedge)
+// PDF EXPORT 
 Route::group(['middleware' => ['auth']], function () {
     // Route::get('/pdf/free/{id}', [PDFController::class, 'createPDF'])->name('create-pdf-free');
     // Route::get('/pdf/berbayar/{id}', [PDFController::class, 'createPDF'])->name('create-pdf-berbayar');
@@ -84,7 +84,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pdf/show/{id}', [DOMPDFController::class, 'show_pdf'])->name('show-pdf');
 });
 
-Route::get('/validate/spp/{id}', [QRController::class, 'generate'])->name('generate-qr');
+// QR CODE
+Route::group(['middleware' => ['auth'], 'prefix' => 'validate'], function () {
+    // Route::get('/spp/{id}', [QRController::class, 'generate'])->name('generate-qr');
+});
+
+Route::get('validate/spp/{id}', [QRController::class, 'scan'])->name('scan-qr');
 
 // DUMMY ROUTING
 Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], function () {

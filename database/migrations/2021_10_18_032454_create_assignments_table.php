@@ -29,6 +29,7 @@ class CreateAssignmentsTable extends Migration
             $table->boolean('approval')->nullable();
             $table->date('approval_date')->nullable();
             $table->boolean('submit')->nullable(); // APAKAH SUDAH READY UNTUK DIBACA PAK GURUH
+            $table->string('unique_id')->nullable()->unique();
             $table->timestamps();
         });
     }

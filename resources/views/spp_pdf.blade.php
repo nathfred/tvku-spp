@@ -96,10 +96,11 @@
         Direktur Utama<br>
         PT. Televisi Kampus Udinus<br>
         <br>
-        <br>
-        <br>
-        <br>
-        Dr. Guruh Fajar Shidik, S.Kom, M.CS<br>
+        @if ($assignment->approval)
+            <img src="{{ asset('qrcodes/spp_validation_'. $assignment->id . '.svg') }}" style="height: 150px; width: 150px;" alt="QR Codes">
+        @endif
+        <br><br><br><br><br><br><br><br>
+        {{-- Dr. Guruh Fajar Shidik, S.Kom, M.CS<br> --}}
         <br>
         Tembusan :<br>
         1. Manager Operasional<br>

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Assignment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class DirectorController extends Controller
 {
@@ -190,6 +191,9 @@ class DirectorController extends Controller
         $assignment->approval_date = $today;
         $assignment->save();
 
+        // GENERATE AND SAVE QR CODE TO LOCAL DIRECTORY
+        $this->generate($assignment->id);
+
         if ($request->approve == TRUE) {
             return redirect(route('director-show-assignments'))->with('message', 'success-approve-assignment');
         } elseif ($request->approve == FALSE) {
@@ -197,5 +201,14 @@ class DirectorController extends Controller
         } else {
             return redirect(route('director-show-assignments'))->with('message', 'unknown-approve-assignment');
         }
+    }
+
+    public function generate($id)
+    {
+        $assignment = Assignment::findOrFail($id);
+
+        $base_url = env('URL_LOCAL', '130.30.1.14:7085');
+        $route_url = '/validate/spp/';
+        $qrcode = QrCode::size(200)->generate($base_url . $route_url  . $assignment->unique_id, '../public/qrcodes/spp_validation_' . $assignment->id . '.svg');
     }
 }

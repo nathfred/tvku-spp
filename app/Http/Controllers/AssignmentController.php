@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Assignment;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -173,6 +174,7 @@ class AssignmentController extends Controller
                 'deadline' => $request->deadline,
                 'info' => $request->info,
                 'type' => $type,
+                'unique_id' => Str::random(32),
             ]);
         } elseif ($type == 'Berbayar') {
             Assignment::create([
@@ -186,6 +188,7 @@ class AssignmentController extends Controller
                 'info' => $request->info,
                 'type' => $type,
                 'nominal' => $request->nominal,
+                'unique_id' => Str::random(32),
             ]);
         } else { // BARTER
             Assignment::create([
@@ -198,6 +201,7 @@ class AssignmentController extends Controller
                 'deadline' => $request->deadline,
                 'info' => $request->info,
                 'type' => $type,
+                'unique_id' => Str::random(32),
             ]);
         }
 

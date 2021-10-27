@@ -2,10 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Assignment;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Carbon\Carbon;
+use App\Models\Assignment;
 use Faker\Factory as Faker;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class AssignmentFactory extends Factory
 {
@@ -44,7 +45,8 @@ class AssignmentFactory extends Factory
             'created' => $today,
             'approval' => NULL,
             'approval_date' =>  NULL,
-            'submit' => FALSE
+            'submit' => FALSE,
+            'unique_id' => Str::random(32),
         ];
     }
 }
