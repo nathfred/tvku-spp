@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QRController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DOMPDFController;
@@ -82,6 +83,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pdf/view/{id}', [UserController::class, 'test_DOMPDF'])->name('test-DOMPDF');
     Route::get('/pdf/show/{id}', [DOMPDFController::class, 'show_pdf'])->name('show-pdf');
 });
+
+Route::get('/validate/spp/{id}', [QRController::class, 'generate'])->name('generate-qr');
 
 // DUMMY ROUTING
 Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], function () {

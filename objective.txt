@@ -28,3 +28,4 @@ REVISI
 -Free : Kembalikan Client & Keterangan (DONE)
 -Edit PDF Format for Free Type (DONE)
 -Nominal auto titik (DONE)
+-Barcode (Generator, Routing)
