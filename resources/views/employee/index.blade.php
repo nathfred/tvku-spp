@@ -213,7 +213,7 @@
                             @endforeach
                         @endif
                         <div class="px-4">
-                            <a href="{{ route('director-show-assignments') }}" class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Lebih Lanjut</a>
+                            <a href="{{ route('employee-show-assignments') }}" class='btn btn-block btn-xl btn-light-primary font-bold mt-3'>Lebih Lanjut</a>
                         </div>
                     </div>
                 </div>
