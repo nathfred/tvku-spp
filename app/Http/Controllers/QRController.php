@@ -28,11 +28,17 @@ class QRController extends Controller
         // MODIF ISI DATA ASSIGNMENT
         // UBAH KE FORMAT CARBON
         $assignment->created = Carbon::createFromFormat('Y-m-d', $assignment->created);
+        $assignment->approval_date = Carbon::createFromFormat('Y-m-d', $assignment->approval_date);
         // UBAH FORMAT KE d-m-Y
         $assignment->created = $assignment->created->format('d-m-Y');
+        $assignment->approval_date = $assignment->approval_date->format('d-m-Y');
+
+        // NOMINAL
         if ($assignment->nominal) {
             $assignment->nominal = 'Rp. ' .  number_format($assignment->nominal, 0, ",", ".");
         }
+
+        // APPROVAL
         if ($assignment->approval == 1) {
             $assignment->approve = 'Disetujui';
         } elseif ($assignment->approval == 0) {
