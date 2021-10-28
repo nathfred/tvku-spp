@@ -24,6 +24,20 @@ class QRController extends Controller
     {
         // AMBIL ASSIGNMENT DARI UNIQUE_ID
         $assignment = Assignment::where('unique_id', $id)->first();
+        if (!$assignment || $assignment === NULL) {
+            return response()->view('sitemap_error')->header('Content-Type', 'text/xml');
+        }
+
+        // BUAT ROMAWI UNTUK BULAN
+        $date = Carbon::createFromFormat('Y-m-d', $assignment->created);
+        $day = $date->day;
+        $assignment->day = $day;
+        $month = $date->month;
+        $assignment->month = $month;
+        $assignment->month_roman = $this->numberToRoman($month);
+        $month_string = $date->locale('id')->monthName;
+        $assignment->month_string = $month_string;
+        $assignment->year = $date->year;
 
         // MODIF ISI DATA ASSIGNMENT
         // UBAH KE FORMAT CARBON
@@ -45,9 +59,42 @@ class QRController extends Controller
             $assignment->approve = 'Tidak Disetujui';
         }
 
+        // SPP
+        if ($assignment->type == 'Free') {
+            $spp_ket = '/FREE/SPP-D/';
+        } elseif ($assignment->type == 'Berbayar') {
+            $spp_ket = '/SPP-D/';
+        } elseif ($assignment->type == 'Barter') {
+            $spp_ket = '/BARTER/SPP-D/';
+        } else {
+            $spp_ket = '/SPP-D/';
+        }
+        $assignment->nspp = $assignment->nspp . $spp_ket . $assignment->month_roman . '/TVKU/' . $assignment->year;
+
+        // INVOICE
+        if ($assignment->type == 'Berbayar') {
+            $assignment->invoice = 'Invoice Nomor I-' . $assignment->nspp . '/KEU/TVKU/' . $assignment->month_roman . '/' . $assignment->year;
+        }
+
         // RETURN XML
         return response()->view('sitemap', [
             'assignment' => $assignment,
         ])->header('Content-Type', 'text/xml');
+    }
+
+    function numberToRoman($number)
+    {
+        $map = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1);
+        $returnValue = '';
+        while ($number > 0) {
+            foreach ($map as $roman => $int) {
+                if ($number >= $int) {
+                    $number -= $int;
+                    $returnValue .= $roman;
+                    break;
+                }
+            }
+        }
+        return $returnValue;
     }
 }

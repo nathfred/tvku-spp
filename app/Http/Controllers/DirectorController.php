@@ -191,8 +191,10 @@ class DirectorController extends Controller
         $assignment->approval_date = $today;
         $assignment->save();
 
-        // GENERATE AND SAVE QR CODE TO LOCAL DIRECTORY
-        $this->generate($assignment->id);
+        // GENERATE AND SAVE QR CODE TO LOCAL DIRECTORY (ONLY IF APPROVED)
+        if ($request->approval == '1' || $request->approve == TRUE) {
+            $this->generate($assignment->id);
+        }
 
         if ($request->approve == TRUE) {
             return redirect(route('director-show-assignments'))->with('message', 'success-approve-assignment');
@@ -209,6 +211,7 @@ class DirectorController extends Controller
 
         $base_url = env('URL_LOCAL', '130.30.1.14:7085');
         $route_url = '/validate/spp/';
+        // GENERATE AND SAVE GENERATED QR CODE TO LOCAL DIRECTORY (.svg FORMAT)
         $qrcode = QrCode::size(200)->generate($base_url . $route_url  . $assignment->unique_id, '../public/qrcodes/spp_validation_' . $assignment->id . '.svg');
     }
 }

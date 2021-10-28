@@ -5,6 +5,8 @@
 
     {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"> --}}
     {{-- <link rel="stylesheet" href="{{ asset('css/app-mazer.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('css/export.css') }}">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
     <link rel="shortcut icon" href="{{ asset('img/tvku_favicon.png') }}" type="image/x-icon">
 </head>
 <body>
@@ -30,7 +32,7 @@
             <tr>
                 <td style="line-height: 1.2em; align=center; padding-left: 110px;">
                     <span style="line-height:1.6; font-weight:bold;	font-size: 16px;">
-                        PT.TELEVISI KAMPUS UNIVERSITAS DIAN NUSWANTORO
+                        PT. TELEVISI KAMPUS UNIVERSITAS DIAN NUSWANTORO
                     </span>
                     <p style="margin: 0px; padding: 0px;">Jl.Nakula I No.5-11 Semarang</p>
                 </td>
@@ -91,16 +93,22 @@
         <br>
         Agar dilaksanakan sebaik-baiknya dengan penuh tanggung jawab <br>
         <br>
-        Semarang, {{ $assignment->day }} {{ $assignment->month_string }} {{ $assignment->year }}
-        <br><br>
-        Direktur Utama<br>
-        PT. Televisi Kampus Udinus<br>
-        <br>
         @if ($assignment->approval)
-            <img src="{{ asset('qrcodes/spp_validation_'. $assignment->id . '.svg') }}" style="height: 150px; width: 150px;" alt="QR Codes">
+            Dokumen ini telah ditandatangani secara elektronik sehingga tidak diperlukan tanda tangan basah pada dokumen ini.<br> <br>
         @endif
-        <br><br><br><br><br><br><br><br>
-        {{-- Dr. Guruh Fajar Shidik, S.Kom, M.CS<br> --}}
+        Semarang, {{ $assignment->day }} {{ $assignment->month_string }} {{ $assignment->year }} <br>
+        <br>
+        Direktur Utama<br>
+        PT. Televisi Kampus Udinus<br><br>
+        
+        @if ($assignment->approval)
+            <img src="{{ asset('qrcodes/spp_validation_'. $assignment->id . '.svg') }}" style="height: 100px; width: 100px; margin-left: 400px" alt="QR Codes">
+        @endif
+        <br>
+        
+        <br><br><br><br>
+        Dr. Guruh Fajar Shidik, S.Kom, M.CS
+        <br>
         <br>
         Tembusan :<br>
         1. Manager Operasional<br>

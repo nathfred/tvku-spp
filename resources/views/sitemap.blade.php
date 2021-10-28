@@ -1,14 +1,15 @@
 <?php echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <spp>
-    <created>{{ $assignment->created }}</created>
-    <type>{{ $assignment->type }}</type>
-    <client>{{ $assignment->client }}</client>
-    <nspp>{{ $assignment->nspp }}</nspp>
-    <nspk>{{ $assignment->nspk }}</nspk>
-    <description>{{ $assignment->description }}</description>
+    <tanggal_dibuat>{{ $assignment->created }}</tanggal_dibuat>
+    <jenis>{{ $assignment->type }}</jenis>
+    <klien>{{ $assignment->client }}</klien>
+    <nomor_spp>{{ $assignment->nspp }}</nomor_spp>
+    <nomor_spk>{{ $assignment->nspk }}</nomor_spk>
+    <invoice>{{ $assignment->invoice }}</invoice>
+    <keterangan>{{ $assignment->description }}</keterangan>
     <nominal>{{ $assignment->nominal }}</nominal>
     <deadline>{{ $assignment->deadline }}</deadline>
-    <priority>{{ $assignment->priority }}</priority>
-    <approval>{{ $assignment->approve }}</approval>
-    <approval_date>{{ $assignment->approval_date }}</approval_date>
+    <prioritas>{{ $assignment->priority }}</prioritas>
+    <disetujui>{{ $assignment->approve }}</disetujui>
+    <tanggal_disetujui>{{ $assignment->approval_date }}</tanggal_disetujui>
 </spp>
