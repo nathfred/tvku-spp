@@ -34,6 +34,4 @@ SUPER
 -role
 -Routing, Middleware, Kernel, RouteServiceProvider 
 -User (Create, Read, Update, Delete)
--Employee (Create, Read, Update, Delete)
--Director (Create, Read, Update, Delete)
 -Alerts

@@ -78,6 +78,12 @@ Route::group(['middleware' => ['auth', 'super'], 'prefix' => 'super'], function 
 
     Route::get('/show/user/{id}', [SuperController::class, 'show_user'])->name('super-show-user');
 
+    Route::post('/edit/user/{id}', [SuperController::class, 'edit_user'])->name('super-edit-user');
+    Route::post('/save/user', [SuperController::class, 'save_user'])->name('super-save-user');
+
+    Route::get('/edit/user/password/{id}', [SuperController::class, 'edit_user_password'])->name('super-edit-user-password');
+    Route::post('/save/user/password/{id}', [SuperController::class, 'save_user_password'])->name('super-save-user-password');
+
     Route::get('/delete/user/{id}', [SuperController::class, 'delete_user'])->name('super-delete-user');
 });
 
