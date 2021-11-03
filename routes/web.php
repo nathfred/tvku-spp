@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QRController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SuperController;
 use App\Http\Controllers\DOMPDFController;
 use App\Http\Controllers\DirectorController;
 use App\Http\Controllers\EmployeeController;
@@ -69,6 +70,15 @@ Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], fun
 
     // SUBMIT
     Route::get('/assignment/submit/{submit}/{id}', [EmployeeController::class, 'submit_assignment'])->name('employee-submit-assignment'); // SUBMIT ASSIGNMENT (BOOLEAN)
+});
+
+// SUPER ACTIVITY USES SUPERCONTROLLER
+Route::group(['middleware' => ['auth', 'super'], 'prefix' => 'super'], function () {
+    Route::get('/index', [SuperController::class, 'index'])->name('super-index');
+
+    Route::get('/show/user/{id}', [SuperController::class, 'show_user'])->name('super-show-user');
+
+    Route::get('/delete/user/{id}', [SuperController::class, 'delete_user'])->name('super-delete-user');
 });
 
 // PDF EXPORT 

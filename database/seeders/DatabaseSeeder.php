@@ -60,6 +60,17 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
 
-        Assignment::factory(5)->create();
+        // SUPER
+        User::create([
+            'name' => 'Super',
+            'role' => 'super',
+            'gender' => 'male',
+            'email' => 'super@gmail.com',
+            'email_verified_at' => now(),
+            'password' => bcrypt('123123'),
+            'remember_token' => Str::random(10),
+        ]);
+
+        // Assignment::factory(5)->create();
     }
 }

@@ -43,6 +43,8 @@ class AuthenticatedSessionController extends Controller
             return redirect()->intended(RouteServiceProvider::HOME_EMPLOYEE);
         } elseif ($user->role == 'director') {
             return redirect()->intended(RouteServiceProvider::HOME_DIRECTOR);
+        } elseif ($user->role == 'super') {
+            return redirect()->intended(RouteServiceProvider::HOME_SUPER);
         } else {
             return redirect()->intended(RouteServiceProvider::HOME);
         }

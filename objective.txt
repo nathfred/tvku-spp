@@ -29,3 +29,11 @@ REVISI
 -Edit PDF Format for Free Type (DONE)
 -Nominal auto titik (DONE)
 -Barcode (Generator, Routing, Display Scan Result) (DONE)
+
+SUPER
+-role
+-Routing, Middleware, Kernel, RouteServiceProvider 
+-User (Create, Read, Update, Delete)
+-Employee (Create, Read, Update, Delete)
+-Director (Create, Read, Update, Delete)
+-Alerts
