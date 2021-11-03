@@ -94,7 +94,7 @@
                                             <a href="{{ route('employee-edit-assignment', ['type' => $assignment->type, 'id' => $assignment->id]) }}" class="btn btn-info"><i class="bi bi-arrow-left-square"></i></a>
                                             @if ($assignment->submit == 0)
                                                 <a href="{{ route('employee-submit-assignment', ['submit' => 1, 'id' => $assignment->id]) }}" class="btn btn-primary"><i class="bi bi-check-square"></i></a>
-                                            @elseif ($assignment->submit == 1)
+                                            @elseif ($assignment->submit == 1 && (!$assignment->approval))
                                                 <a href="{{ route('employee-submit-assignment', ['submit' => 0, 'id' => $assignment->id]) }}" class="btn btn-warning"><i class="bi bi-dash-square"></i></a>
                                             @endif
                                             @if ($assignment->type == 'Free')
