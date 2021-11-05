@@ -29,6 +29,7 @@ REVISI
 -Edit PDF Format for Free Type (DONE)
 -Nominal auto titik (DONE)
 -Barcode (Generator, Routing, Display Scan Result) (DONE)
+-Layout PDF (DONE)
 
 SUPER
 -role

@@ -102,11 +102,10 @@
         PT. Televisi Kampus Udinus<br><br>
         
         @if ($assignment->approval)
-            <img src="{{ asset('qrcodes/spp_validation_'. $assignment->id . '.svg') }}" style="height: 100px; width: 100px; margin-left: 400px" alt="QR Codes">
+            <img src="{{ asset('qrcodes/spp_validation_'. $assignment->id . '.svg') }}" style="height: 100px; width: 100px; margin-left: 0px" alt="QR Codes">
+            <p style="margin-left: 150px; margin-top: 80px; color: blue; font-size: 12px;">Signed by electronic</p>
         @endif
-        <br>
         
-        <br><br><br><br>
         Dr. Guruh Fajar Shidik, S.Kom, M.CS
         <br>
         <br>
