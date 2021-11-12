@@ -80,6 +80,14 @@
                                                     <input type="text" id="nominal" class="form-control" name="nominal" required>
                                                 </div>
                                             @endif
+                                            @if ($type == 'Berbayar')
+                                                <div class="col-md-4">
+                                                    <label>Beban Marketing</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input type="text" id="marketing_expense" class="form-control" name="marketing_expense">
+                                                </div>
+                                            @endif
                                             <div class="col-md-4">
                                                 <label>Deadline</label>
                                             </div>

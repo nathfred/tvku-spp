@@ -81,7 +81,15 @@
                                                     <label>Nominal</label>
                                                 </div>
                                                 <div class="col-md-8 form-group">
-                                                    <input type="text" id="nominal" class="form-control" name="nominal" value="{{ $assignment->description }}" disabled>
+                                                    <input type="text" id="nominal" class="form-control" name="nominal" value="{{ $assignment->nominal }}" disabled>
+                                                </div>
+                                            @endif
+                                            @if ($type == 'Berbayar')
+                                                <div class="col-md-4">
+                                                    <label>Beban Marketing</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input type="text" id="marketing_expense" class="form-control" name="marketing_expense" value="{{ $assignment->marketing_expense }}" disabled>
                                                 </div>
                                             @endif
                                             <div class="col-md-4">

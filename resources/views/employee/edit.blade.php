@@ -13,10 +13,10 @@
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <div class="row">
                         <div class="col">
-                            <h3>Buat Penugasan</h3>
+                            <h3>Edit Penugasan</h3>
                         </div>
                     </div>
-                    <p class="text-subtitle text-muted">Buat Penugasan Baru ({{ $type }})</p>
+                    <p class="text-subtitle text-muted">Edit Penugasan ({{ $type }})</p>
                 </div>
             </div>
         </div>
@@ -88,6 +88,14 @@
                                                 </div>
                                                 <div class="col-md-8 form-group">
                                                     <input type="text" id="nominal" class="form-control" name="nominal" value="{{ $assignment->nominal }}" required>
+                                                </div>
+                                            @endif
+                                            @if ($type == 'Berbayar')
+                                                <div class="col-md-4">
+                                                    <label>Beban Marketing</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input type="text" id="marketing_expense" class="form-control" name="marketing_expense" value="{{ $assignment->marketing_expense }}">
                                                 </div>
                                             @endif
                                             <div class="col-md-4">

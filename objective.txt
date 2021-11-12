@@ -30,6 +30,7 @@ REVISI
 -Nominal auto titik (DONE)
 -Barcode (Generator, Routing, Display Scan Result) (DONE)
 -Layout PDF (DONE)
+-Atribut Beban Marketing pada Berbayar (DB, Views, XML) (DONE)
 
 SUPER
 -role

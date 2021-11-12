@@ -91,14 +91,24 @@ class AssignmentController extends Controller
     {
         $assignments = Assignment::orderBy('created', 'desc')->get();
 
+        foreach ($assignments as $assignment) {
+            // UBAH NOMINAL DAN MARKETING EXPENSE KE INTEGER
+            if ($assignment->type == 'Berbayar') {
+                $assignment->nominal = (int)$assignment->nominal;
+                $assignment->marketing_expense = (int)$assignment->marketing_expense;
+                // KURANGI
+                $assignment->nominal_expense = $assignment->nominal - $assignment->marketing_expense;
+            }
+        }
+
         // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y) dan Number Format untuk Nominal
         foreach ($assignments as $assignment) {
             // UBAH KE FORMAT CARBON
             $assignment->created = Carbon::createFromFormat('Y-m-d', $assignment->created);
             // UBAH FORMAT KE d-m-Y
             $assignment->created = $assignment->created->format('d-m-Y');
-            if ($assignment->nominal) {
-                $assignment->nominal = 'Rp. ' .  number_format($assignment->nominal, 0, ",", ".");
+            if ($assignment->nominal_expense) {
+                $assignment->nominal_expense = 'Rp. ' .  number_format($assignment->nominal_expense, 0, ",", ".");
             }
         }
 
@@ -188,6 +198,7 @@ class AssignmentController extends Controller
                 'info' => $request->info,
                 'type' => $type,
                 'nominal' => $request->nominal,
+                'marketing_expense' => $request->marketing_expense,
                 'unique_id' => Str::random(32),
             ]);
         } else { // BARTER
@@ -240,6 +251,7 @@ class AssignmentController extends Controller
 
     public function save_assignment(Request $request, $type, $id)
     {
+        // dd($request);
         $assignment = Assignment::find($id);
 
         // VALIDASI APAKAH ASSIGNMENT ADA
@@ -278,6 +290,7 @@ class AssignmentController extends Controller
 
         if ($type == 'Berbayar') {
             $assignment->nominal = $request->nominal;
+            $assignment->marketing_expense = $request->marketing_expense;
         }
 
         // SAVE ALL TYPE

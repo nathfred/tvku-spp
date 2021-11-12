@@ -129,14 +129,24 @@ class DirectorController extends Controller
     {
         $assignments = Assignment::orderBy('created', 'desc')->where('submit', 1)->get();
 
-        // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y)
+        foreach ($assignments as $assignment) {
+            // UBAH NOMINAL DAN MARKETING EXPENSE KE INTEGER
+            if ($assignment->type == 'Berbayar') {
+                $assignment->nominal = (int)$assignment->nominal;
+                $assignment->marketing_expense = (int)$assignment->marketing_expense;
+                // KURANGI
+                $assignment->nominal_expense = $assignment->nominal - $assignment->marketing_expense;
+            }
+        }
+
+        // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y) dan Number Format untuk Nominal
         foreach ($assignments as $assignment) {
             // UBAH KE FORMAT CARBON
             $assignment->created = Carbon::createFromFormat('Y-m-d', $assignment->created);
             // UBAH FORMAT KE d-m-Y
             $assignment->created = $assignment->created->format('d-m-Y');
-            if ($assignment->nominal) {
-                $assignment->nominal = 'Rp. ' .  number_format($assignment->nominal, 0, ",", ".");
+            if ($assignment->nominal_expense) {
+                $assignment->nominal_expense = 'Rp. ' .  number_format($assignment->nominal_expense, 0, ",", ".");
             }
         }
 

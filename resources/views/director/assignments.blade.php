@@ -63,7 +63,7 @@
                                             <td>{{ $assignment->client }}</td>
                                         @endif
                                         @if ($assignment->type == 'Berbayar')
-                                            <td>{{ $assignment->nominal }}</td>
+                                            <td>{{ $assignment->nominal_expense }}</td>
                                         @else
                                             <td>-</td>
                                         @endif
