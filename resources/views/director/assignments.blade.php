@@ -12,14 +12,31 @@
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
                     <h3>Daftar Penugasan</h3>
-                    <p class="text-subtitle text-muted">Daftar Penugasan</p>
+                    <p class="text-subtitle text-muted">Daftar SPP 
+                        @isset ($approval)
+                            @if ($approval == 'responded')
+                                (Sudah Direspon)
+                            @elseif ($approval == 'unresponded')
+                                (Belum Direspon)
+                            @elseif ($approval == 'today')
+                                (Disusun Hari Ini)
+                            @else
+                                (Semua Dokumen)
+                            @endif
+                        @endisset
+                    </p>
                 </div>
             </div>
         </div>
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    Tabel Daftar Penugasan
+                    <div class="d-flex flex-row bd-highlight">
+                        <div class="buttons">
+                            <a href="{{ route('director-show-assignments-filtered',['approval'=>'unresponded']) }}" class="btn {{ ($approval === "unresponded") ? 'btn-warning' : 'btn-muted bg-light' }} rounded-pill me-1">Belum Direspon</a>
+                            <a href="{{ route('director-show-assignments-filtered',['approval'=>'responded']) }}" class="btn {{ ($approval === "responded") ? 'btn-success' : 'btn-muted bg-light' }} rounded-pill me-1">Sudah Direspon</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped" id="table1">

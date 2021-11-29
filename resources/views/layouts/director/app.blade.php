@@ -47,11 +47,19 @@
                             </a>
                         </li>
                         
-                        <li class="sidebar-item {{ ($active === "assignment") ? 'active' : '' }}">
+                        <li class="sidebar-item has-sub {{ ($active === "assignment") ? 'active' : '' }}">
                             <a href="{{ route('director-show-assignments') }}" class='sidebar-link'>
                                 <i class="bi bi-stack"></i>
                                 <span>Penugasan</span>
                             </a>
+                            <ul class="submenu">
+                                <li class="submenu-item">
+                                    <a href="{{ route('director-show-assignments-filtered',['approval'=>'responded']) }}">Sudah Direspon</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a href="{{ route('director-show-assignments-filtered',['approval'=>'unresponded']) }}">Belum Direspon</a>
+                                </li>
+                            </ul>
                         </li>
 
                         {{-- <li class="sidebar-item has-sub {{ ($active === "assignment") ? 'active' : '' }}">

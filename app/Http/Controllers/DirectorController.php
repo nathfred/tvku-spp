@@ -154,6 +154,48 @@ class DirectorController extends Controller
             'title' => 'List Penugasan',
             'active' => 'assignment',
             'assignments' => $assignments,
+            'approval' => NULL,
+        ]);
+    }
+
+    public function show_assignments_filtered($approval)
+    {
+        $today = Carbon::today('GMT+7');
+        if ($approval == 1 || $approval == 'responded') {
+            $assignments = Assignment::orderBy('created', 'desc')->where('submit', 1)->whereNotNull('approval')->get();
+        } elseif ($approval == 0 || $approval == 'unresponded') {
+            $assignments = Assignment::orderBy('created', 'desc')->where('submit', 1)->whereNull('approval')->get();
+        } elseif ($approval == 'today') {
+            $assignments = Assignment::orderBy('created', 'desc')->where('submit', 1)->where('created', $today)->get();
+        }
+
+
+        foreach ($assignments as $assignment) {
+            // UBAH NOMINAL DAN MARKETING EXPENSE KE INTEGER
+            if ($assignment->type == 'Berbayar') {
+                $assignment->nominal = (int)$assignment->nominal;
+                $assignment->marketing_expense = (int)$assignment->marketing_expense;
+                // KURANGI
+                $assignment->nominal_expense = $assignment->nominal - $assignment->marketing_expense;
+            }
+        }
+
+        // UBAH FORMAT 'created' DATE (Y-m-d menjadi d-m-Y) dan Number Format untuk Nominal
+        foreach ($assignments as $assignment) {
+            // UBAH KE FORMAT CARBON
+            $assignment->created = Carbon::createFromFormat('Y-m-d', $assignment->created);
+            // UBAH FORMAT KE d-m-Y
+            $assignment->created = $assignment->created->format('d-m-Y');
+            if ($assignment->nominal_expense) {
+                $assignment->nominal_expense = 'Rp. ' .  number_format($assignment->nominal_expense, 0, ",", ".");
+            }
+        }
+
+        return view('director.assignments', [
+            'title' => 'List Penugasan',
+            'active' => 'assignment',
+            'assignments' => $assignments,
+            'approval' => $approval,
         ]);
     }
 

@@ -20,7 +20,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="stats-icon purple">
-                                            <i class="iconly-boldPaper"></i>
+                                            <a href="{{ route('director-show-assignments') }}"><i class="iconly-boldPaper"></i></a>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
@@ -37,7 +37,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="stats-icon green">
-                                            <i class="iconly-boldShow"></i>
+                                            <a href="{{ route('director-show-assignments-filtered',['approval'=>'responded']) }}"><i class="iconly-boldShow"></i></a>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
@@ -54,7 +54,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="stats-icon red">
-                                            <i class="iconly-boldDanger"></i>
+                                            <a href="{{ route('director-show-assignments-filtered',['approval'=>'unresponded']) }}"><i class="iconly-boldDanger"></i></a>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
@@ -71,7 +71,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="stats-icon blue">
-                                            <i class="iconly-boldPaper-Plus"></i>
+                                            <a href="{{ route('director-show-assignments-filtered',['approval'=>'today']) }}"><i class="iconly-boldPaper-Plus"></i></a>
                                         </div>
                                     </div>
                                     <div class="col-md-8">

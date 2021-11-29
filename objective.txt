@@ -32,6 +32,7 @@ REVISI
 -Layout PDF (DONE)
 -Atribut Beban Marketing pada Berbayar (DB, Views, XML) (DONE)
 -Fitur Forgot Password (DONE)
+-Director Pisah View Assignments berdasarkan respon (responded, unresponded, today) (DONE)
 
 SUPER
 -role
