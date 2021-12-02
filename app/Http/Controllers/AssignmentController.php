@@ -169,7 +169,7 @@ class AssignmentController extends Controller
         }
         $request->validate([
             'created' => 'required|date',
-            'nspp' => 'required|integer',
+            'nspp' => 'required',
             'deadline' => 'required|string',
             'info' => 'required|string'
         ]);
@@ -277,7 +277,7 @@ class AssignmentController extends Controller
         }
         $request->validate([
             'created' => 'required|date',
-            'nspp' => 'required|integer',
+            'nspp' => 'required',
             'deadline' => 'required|string',
             'info' => 'required|string'
         ]);
