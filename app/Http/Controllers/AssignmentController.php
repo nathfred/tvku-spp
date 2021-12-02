@@ -164,7 +164,7 @@ class AssignmentController extends Controller
             $request->validate([
                 'nspk' => 'required|string',
                 'client' => 'required|string',
-                'description' => 'required|string',
+                'description' => 'reqtvku-spp 2-12-2021uired|string',
             ]);
         }
         $request->validate([
