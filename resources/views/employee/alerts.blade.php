@@ -48,5 +48,14 @@
             showConfirmButton: true,
         })
     </script>
+@elseif (Session::has('message') && Session::get('message') == 'assignment-already-nspp')
+    <script>
+        Swal.fire({
+            icon: 'error',
+            title: 'Nomor SPP Sudah Terpakai!',
+            text: 'Penugasan Dengan Nomor SPP dan Jenis Ini Sudah Ada Di Tahun Ini',
+            showConfirmButton: true,
+        })
+    </script>
 
 @endif

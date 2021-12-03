@@ -32,9 +32,23 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex flex-row bd-highlight">
+                        <div class="btn-group mb-1">
+                            <div class="dropdown">
+                                <button class="btn btn-info rounded-pill dropdown-toggle me-1" type="button"
+                                    id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    SPP Tahunan
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @foreach ($years as $year)
+                                        <a class="dropdown-item" href="{{ route('director-show-assignments',['year'=>$year]) }}">{{ $year }}</a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
                         <div class="buttons">
-                            <a href="{{ route('director-show-assignments-filtered',['approval'=>'unresponded']) }}" class="btn {{ ($approval === "unresponded") ? 'btn-warning' : 'btn-muted bg-light' }} rounded-pill me-1">Belum Direspon</a>
-                            <a href="{{ route('director-show-assignments-filtered',['approval'=>'responded']) }}" class="btn {{ ($approval === "responded") ? 'btn-success' : 'btn-muted bg-light' }} rounded-pill me-1">Sudah Direspon</a>
+                            <a href="{{ route('director-show-assignments-filtered',['approval'=>'unresponded','year'=>$target_year]) }}" class="btn {{ ($approval === "unresponded") ? 'btn-warning' : 'btn-muted bg-light' }} rounded-pill me-1">Belum Direspon</a>
+                            <a href="{{ route('director-show-assignments-filtered',['approval'=>'responded','year'=>$target_year]) }}" class="btn {{ ($approval === "responded") ? 'btn-success' : 'btn-muted bg-light' }} rounded-pill me-1">Sudah Direspon</a>
                         </div>
                     </div>
                 </div>

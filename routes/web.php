@@ -38,8 +38,8 @@ Route::group(['middleware' => ['auth', 'director'], 'prefix' => 'director'], fun
     Route::get('/index', [DirectorController::class, 'index'])->name('director-index'); // INDEX
 
     // READ
-    Route::get('/assignment/show', [DirectorController::class, 'show_assignments'])->name('director-show-assignments'); // ALL (TABLE)
-    Route::get('/assignment/show/{approval}', [DirectorController::class, 'show_assignments_filtered'])->name('director-show-assignments-filtered'); // RESPONDED OR UNRESPONDED OR TODAY (TABLE)
+    Route::get('/assignment/show/{year?}', [DirectorController::class, 'show_assignments'])->name('director-show-assignments'); // ALL (TABLE)
+    Route::get('/assignment/show/filtered/{approval}/{year?}', [DirectorController::class, 'show_assignments_filtered'])->name('director-show-assignments-filtered'); // RESPONDED OR UNRESPONDED OR TODAY (TABLE)
     Route::get('/assignment/detail/{type}/{id}', [DirectorController::class, 'detail_assignment'])->name('director-detail-assignment'); // SINGLE (FORM)
     Route::post('/assignment/detail/{type}/{id}', [DirectorController::class, 'save_assignment'])->name('director-save-assignment'); // POST REQUEST SET PRIORITY AND APPROVAL
 
@@ -55,7 +55,8 @@ Route::group(['middleware' => ['auth', 'employee'], 'prefix' => 'employee'], fun
     Route::get('/index', [EmployeeController::class, 'index'])->name('employee-index'); // INDEX
 
     // READ
-    Route::get('/assignment/show', [AssignmentController::class, 'show_assignments'])->name('employee-show-assignments'); // ALL (TABLE)
+    Route::get('/assignment/show/{year?}', [AssignmentController::class, 'show_assignments'])->name('employee-show-assignments'); // ALL (TABLE)
+    // Route::get('/assignment/show/{year}', [AssignmentController::class, 'show_assignments_yearly'])->name('employee-show-assignments-yearly'); // YEARLY (TABLE)
 
     // FORM CREATE & STORE
     Route::get('/assignment/pre-create', [AssignmentController::class, 'pre_create_assignment'])->name('employee-pre-create-assignment'); // SELECT ASSIGNMENT TYPE

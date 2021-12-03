@@ -8,6 +8,7 @@ use App\Models\Assignment;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Expr\Assign;
 
 class AssignmentController extends Controller
 {
@@ -87,9 +88,16 @@ class AssignmentController extends Controller
         //
     }
 
-    public function show_assignments()
+    public function show_assignments($year = NULL)
     {
-        $assignments = Assignment::orderBy('created', 'desc')->get();
+        $now = Carbon::now('GMT+7');
+        $this_year = $now->year;
+        if ($year === NULL) {
+            $assignments = Assignment::whereYear('created', $this_year)->orderBy('created', 'desc')->get();
+        } else {
+            $assignments = Assignment::whereYear('created', $year)->orderBy('created', 'desc')->get();
+        }
+
 
         foreach ($assignments as $assignment) {
             // UBAH NOMINAL DAN MARKETING EXPENSE KE INTEGER
@@ -112,10 +120,14 @@ class AssignmentController extends Controller
             }
         }
 
+        // ARRAY TAHUN DARI 2021 SAMPAI SAAT INI (DYNAMIC)
+        $years = range(2021, $this_year);
+
         return view('employee.assignments', [
             'title' => 'List Penugasan',
             'active' => 'assignment',
             'assignments' => $assignments,
+            'years' => $years,
         ]);
     }
 
@@ -173,6 +185,15 @@ class AssignmentController extends Controller
             'deadline' => 'required|string',
             'info' => 'required|string'
         ]);
+
+        // CEK APAKAH NSPP DOUBLE SESUAI KATEGORI DAN TAHUN
+        $now = Carbon::now('GMT+7');
+        $this_year = $now->year;
+
+        $assignment_already_nspp = Assignment::where('type', $type)->whereYear('created', $this_year)->where('nspp', $request->nspp)->first();
+        if ($assignment_already_nspp === TRUE || !is_null($assignment_already_nspp) || !empty($assignment_already_nspp)) {
+            return back()->with('message', 'assignment-already-nspp');
+        }
 
         if ($type == 'Free') {
             Assignment::create([

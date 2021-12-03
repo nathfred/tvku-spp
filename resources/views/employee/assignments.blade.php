@@ -25,7 +25,22 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    Tabel Daftar Penugasan
+                    <div class="d-flex flex-row bd-highlight">
+                        <div class="btn-group mb-1">
+                            <div class="dropdown">
+                                <button class="btn btn-info rounded-pill dropdown-toggle me-1" type="button"
+                                    id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    SPP Tahunan
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    @foreach ($years as $year)
+                                        <a class="dropdown-item" href="{{ route('employee-show-assignments',['year'=>$year]) }}">{{ $year }}</a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table table-striped" id="table1">

@@ -33,8 +33,8 @@ REVISI
 -Atribut Beban Marketing pada Berbayar (DB, Views, XML) (DONE)
 -Fitur Forgot Password (DONE)
 -Director Pisah View Assignments berdasarkan respon (responded, unresponded, today) (DONE)
--No SPP tidak boleh kembar berdasarkan tipe & tahun
--Tampilan daftar SPP Fresh Per tahun + History Per tahun
+-No SPP tidak boleh kembar berdasarkan tipe & tahun (DONE)
+-Tampilan daftar SPP Fresh Per tahun + History Per tahun (DONE)
 
 SUPER
 -role

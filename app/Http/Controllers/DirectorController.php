@@ -125,9 +125,15 @@ class DirectorController extends Controller
         //
     }
 
-    public function show_assignments()
+    public function show_assignments($year = NULL)
     {
-        $assignments = Assignment::orderBy('created', 'desc')->where('submit', 1)->get();
+        $now = Carbon::now('GMT+7');
+        $this_year = $now->year;
+        if ($year === NULL) { // THIS YEAR
+            $assignments = Assignment::whereYear('created', $this_year)->where('submit', 1)->orderBy('created', 'desc')->get();
+        } else { // CERTAIN YEAR (PARAMETER)
+            $assignments = Assignment::whereYear('created', $year)->where('submit', 1)->orderBy('created', 'desc')->get();
+        }
 
         foreach ($assignments as $assignment) {
             // UBAH NOMINAL DAN MARKETING EXPENSE KE INTEGER
@@ -149,26 +155,42 @@ class DirectorController extends Controller
                 $assignment->nominal_expense = 'Rp. ' .  number_format($assignment->nominal_expense, 0, ",", ".");
             }
         }
+
+        // ARRAY TAHUN DARI 2021 SAMPAI SAAT INI (DYNAMIC)
+        $years = range(2021, $this_year);
 
         return view('director.assignments', [
             'title' => 'List Penugasan',
             'active' => 'assignment',
             'assignments' => $assignments,
             'approval' => NULL,
+            'years' => $years,
+            'target_year' => $year,
         ]);
     }
 
-    public function show_assignments_filtered($approval)
+    public function show_assignments_filtered($approval, $year = NULL)
     {
+        $now = Carbon::now('GMT+7');
+        $this_year = $now->year;
         $today = Carbon::today('GMT+7');
-        if ($approval == 1 || $approval == 'responded') {
-            $assignments = Assignment::orderBy('created', 'desc')->where('submit', 1)->whereNotNull('approval')->get();
-        } elseif ($approval == 0 || $approval == 'unresponded') {
-            $assignments = Assignment::orderBy('created', 'desc')->where('submit', 1)->whereNull('approval')->get();
-        } elseif ($approval == 'today') {
-            $assignments = Assignment::orderBy('created', 'desc')->where('submit', 1)->where('created', $today)->get();
+        if ($year === NULL) { // THIS YEAR
+            if ($approval == 1 || $approval == 'responded') {
+                $assignments = Assignment::orderBy('created', 'desc')->where('submit', 1)->whereNotNull('approval')->get();
+            } elseif ($approval == 0 || $approval == 'unresponded') {
+                $assignments = Assignment::orderBy('created', 'desc')->where('submit', 1)->whereNull('approval')->get();
+            } elseif ($approval == 'today') {
+                $assignments = Assignment::orderBy('created', 'desc')->where('submit', 1)->where('created', $today)->get();
+            }
+        } else { // CERTAIN YEAR (PARAMETER)
+            if ($approval == 1 || $approval == 'responded') {
+                $assignments = Assignment::orderBy('created', 'desc')->whereYear('created', $year)->where('submit', 1)->whereNotNull('approval')->get();
+            } elseif ($approval == 0 || $approval == 'unresponded') {
+                $assignments = Assignment::orderBy('created', 'desc')->whereYear('created', $year)->where('submit', 1)->whereNull('approval')->get();
+            } elseif ($approval == 'today') {
+                $assignments = Assignment::orderBy('created', 'desc')->whereYear('created', $year)->where('submit', 1)->where('created', $today)->get();
+            }
         }
-
 
         foreach ($assignments as $assignment) {
             // UBAH NOMINAL DAN MARKETING EXPENSE KE INTEGER
@@ -191,11 +213,16 @@ class DirectorController extends Controller
             }
         }
 
+        // ARRAY TAHUN DARI 2021 SAMPAI SAAT INI (DYNAMIC)
+        $years = range(2021, $this_year);
+
         return view('director.assignments', [
             'title' => 'List Penugasan',
             'active' => 'assignment',
             'assignments' => $assignments,
             'approval' => $approval,
+            'years' => $years,
+            'target_year' => $year,
         ]);
     }
 
