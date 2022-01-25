@@ -28,7 +28,7 @@
         }
         </style>
         <img src="{{ asset('img/tvku_logo_spp.jpg') }}" style="height: auto; width: 100px;">
-        <table id="table2" style="width: 100%" align="center">
+        <table id="table2" style="width: 100%; align=center;">
             <tr>
                 <td style="line-height: 1.2em; align=center; padding-left: 110px;">
                     <span style="line-height:1.6; font-weight:bold;	font-size: 16px;">
